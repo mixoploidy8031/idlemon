@@ -2,43 +2,46 @@ import os
 import random
 import time
 import threading
+import base64
 from PIL import Image, ImageTk
 import tkinter as tk
 from tkinter import ttk
 from colorama import Fore, Style
+from config_loader import load_config, check_file_exists
+from pokemon_display import display_pokemon_gif
+from data_manager import load_shiny_count, save_shiny_count, load_pokemon_data
 
-# File to store the shiny Pokémon count
-SHINY_COUNT_FILE = "shiny_count.txt"
+# Load configuration
+config = load_config()
 
-# Load shiny count from txt file
-def load_shiny_count():
-    if os.path.exists(SHINY_COUNT_FILE):
-        with open(SHINY_COUNT_FILE, "r") as file:
-            try:
-                return int(file.read().strip())
-            except ValueError:
-                return 0 # Default 0 if file corrupted
-    return 0
+# Extract user-configurable values
+gif_directory = config["gif_directory"]
+background_image = config["background_image"]
 
-# Save shiny count to txt file
-def save_shiny_count(count):
-    with open(SHINY_COUNT_FILE, "w") as file:
-        file.write(str(count))
+# Extract internal defaults
+shiny_count_file = config["shiny_count_file"]
+pokemon_data_file = config["pokemon_data_file"]
+encounter_delay = config["encounter_delay"]
+rarity_weights = config["rarity_weights"]
+shiny_rate = config["shiny_rate"]
+
+# Validate required files
+check_file_exists(shiny_count_file)
+check_file_exists(pokemon_data_file)
+check_file_exists(background_image)
 
 # Update shiny count and save it
 def update_shiny_count():
     global total_shiny_found
     total_shiny_found += 1
     shiny_label.config(text=f"Shiny Pokémon Found: {total_shiny_found}")
-    save_shiny_count(total_shiny_found) # Call save function
-    print(Fore.YELLOW + f"Shiny Pokémon count updated: {total_shiny_found}" + Style.RESET_ALL)
+    save_shiny_count(total_shiny_found)
 
-# Initiaize shiny count from file
+# Initialize shiny count from file
 def initialize_shiny_count():
     global total_shiny_found
     total_shiny_found = load_shiny_count()
     shiny_label.config(text=f"Shiny Pokémon Found: {total_shiny_found}")
-    print(Fore.GREEN + f"Loaded shiny Pokémon count: {total_shiny_found}" + Style.RESET_ALL)
 
 # Handle shiny Pokémon encounter
 def handle_shiny_encounter(pokemon_name, pokemon_rarity):
@@ -52,58 +55,37 @@ def handle_shiny_encounter(pokemon_name, pokemon_rarity):
     update_shiny_count()
     continue_button.place(relx=0.5, rely=0.5, anchor="center")
     timer_running = False
-    
-##########################
-## BEGINNING OF PROGRAM ##
-##########################
 
+# Load Pokémon data
+def initialize_pokemon_data():
+    global pokemon_data
+    pokemon_data = load_pokemon_data(config["pokemon_data_file"])
 
-
-# Start of the adventure
-print(Fore.CYAN + "You start walking around the Kanto region..." + Style.RESET_ALL)
-
-# Function to load Pokémon names and their rarity from the file
-def load_pokemon_data():
-    pokemon_data = {}
-    with open("gen1_pokemon_names.txt", "r", encoding ="utf-8") as file:
-        for line in file:
-            name, rarity = line.strip().split(',')
-            pokemon_data[name] = rarity
-    return pokemon_data
-
-# Calculate the encounter rate based on rarity
+# Calculate encounter weights based on rarity
 def calculate_weights(pokemon_data):
-    rarity_map = {
-        "Very Common": 100,
-        "Common": 85,
-        "Semi-rare": 67.5,
-        "Rare": 33.3,
-        "Very Rare": 12.5,
-    }
-    weights = [rarity_map.get(rarity, 0) for rarity in pokemon_data.values()]
+    weights = [rarity_weights.get(rarity, 0) for rarity in pokemon_data.values()]
     return weights
 
-# Simulates shiny encounter
+# Simulate shiny encounter
 def shiny_pokemon():
-    shiny_value = random.randint(1, 10) # Default rate is 1/8192
-    if shiny_value == 1: # If the value is 1, it's a shiny
-        return True # Shiny Pokémon found
-    else:
-        # Small chance to hear nearby shiny if not found yet
-        if random.randint(1, 819) == 1:
-            print(Fore.MAGENTA + "You hear a shiny Pokémon nearby..." + Style.RESET_ALL)
-        return False # Print nothing 
+    shiny_value = random.randint(1, shiny_rate)
+    if shiny_value == 1:
+        return True
+    elif random.randint(1, shiny_rate // 5) == 1:
+        print(Fore.MAGENTA + "You hear a shiny Pokémon nearby..." + Style.RESET_ALL)
+    return False
 
-# Display the Pokémon GIF in the Tkinter window
+# Display the Pokémon GIF
 def display_pokemon_gif(pokemon_name, is_shiny=False):
     global current_encounter
     if current_encounter != pokemon_name:
-        return # Skip if this is not the current encounter
+        return
 
     try:
-        # Determine the correct file path based on shiny status
         gif_type = "shiny" if is_shiny else "normal"
-        gif_path = f"C:/Users/googl/Documents/PythonScripts/PokemonAuto-Hunt_v0.1.0/AutoShinyHunt_Project/gen1_gifs/{gif_type}/{pokemon_name}.gif"
+        gif_path = os.path.join(gif_directory, gif_type, f"{pokemon_name}.gif")
+        
+        # Open the GIF
         image = Image.open(gif_path)
         frames = []
         
@@ -111,11 +93,11 @@ def display_pokemon_gif(pokemon_name, is_shiny=False):
         for frame in range(0, image.n_frames):
             image.seek(frame)
             frames.append(ImageTk.PhotoImage(image.copy()))
-            
-        # Cycle though the frames to animate
+
+        # Cycle through the frames to animate
         def animate(frame_index=0):
             if current_encounter != pokemon_name:
-                return # Stop animation if the encounter has changed
+                return  # Stop animation if the encounter has changed
             
             # Clear only Pokémon GIF
             canvas.delete("pokemon_gif")
@@ -131,8 +113,9 @@ def display_pokemon_gif(pokemon_name, is_shiny=False):
             
             # Schedule next frame
             root.after(50, animate, (frame_index + 1) % len(frames))
-            
+        
         animate()
+
     except Exception as e:
         print(f"Error loading {pokemon_name}: {e}")
 
@@ -140,7 +123,6 @@ def display_pokemon_gif(pokemon_name, is_shiny=False):
 def update_timer():
     global elapsed_time, start_time, timer_running
     while timer_running:
-        # Calculate elapsed time
         if start_time is not None:
             elapsed_time += time.time() - start_time
             start_time = time.time()
@@ -153,45 +135,53 @@ def continue_hunt():
     global shiny_found, start_time, timer_running
     shiny_found = False
     start_time = time.time()
-    continue_button.place_forget() # Hides button
+    continue_button.place_forget()
     if not timer_running:
         timer_running = True
         threading.Thread(target=update_timer, daemon=True).start()
-    start_encounter_thread() # Restart encounter loop
+    start_encounter_thread()
 
 # Start the encounter loop
 def start_encounter():
-    global current_encounter, total_encounters, shiny_found, timer_running, total_shiny_found
-    pokemon_data = load_pokemon_data() # Load Pokémon names and rarities
+    global current_encounter, total_encounters, shiny_found
+
+    # Load Pokémon data
+    pokemon_data = load_pokemon_data(config["pokemon_data_file"])
+    if not pokemon_data:
+        print("No Pokémon data available. Exiting encounter loop.")
+        return
+    
+    # Extract Pokémon names and calculate weights
     pokemon_list = list(pokemon_data.keys())
     weights = calculate_weights(pokemon_data)
-    #start_time = time.time()
-    
-    while not shiny_found: # Stop loop when shiny is found
-        time.sleep(3.0) # Delay between encounters (1.0 = 1 second)
+
+    # Encounter loop
+    while not shiny_found:
+        time.sleep(encounter_delay)
         total_encounters += 1
-        encounter_label.config(text=f"Encounters: {total_encounters}") # Update encounter count in GUI
-        
-        # Select a Pokémon based on weighted probability
+        encounter_label.config(text=f"Encounters: {total_encounters}")
+
+        # Randomly select a Pokémon based on weights
         pokemon_name = random.choices(pokemon_list, weights=weights, k=1)[0]
         pokemon_rarity = pokemon_data[pokemon_name]
         current_encounter = pokemon_name
-            
-        # Perform shiny check and display Pokémon
+
+        # Determine if the encounter is shiny
         is_shiny = shiny_pokemon()
+
+        # Display Pokémon gif
         display_pokemon_gif(pokemon_name, is_shiny=is_shiny)
-        info_label.config(text=f"{pokemon_name} - {pokemon_rarity}")
-    
-        # Break if shiny is found
+
+        # Update info label for shiny or normal Pokémon
         if is_shiny:
             handle_shiny_encounter(pokemon_name, pokemon_rarity)
         else:
             info_label.config(
                 text=f"{pokemon_name} - {pokemon_rarity}",
-                fg="white" # Set desired color for wild Pokémon
+                fg="white"  # Reset color to white for normal Pokémon
             )
             print(f"You encountered a wild {pokemon_name}!")
- 
+
 # Start encounter simulation
 def start_encounter_thread():
     threading.Thread(target=start_encounter, daemon=True).start()
@@ -226,33 +216,35 @@ timer_running = False
 # Initialize the Tkinter window
 root = tk.Tk()
 root.title("Pokémon Auto-Hunt")
-root.minsize(500, 500) # Set minimum size
+root.minsize(500, 500)
 
 # Load the background image
-background_image = tk.PhotoImage(file="C:/Users/googl/Documents/PythonScripts/PokemonAuto-Hunt_v0.1.0/AutoShinyHunt_Project/assets/bkg1.jpg")
+background_image_path = os.path.join(os.getcwd(), background_image)
+if not check_file_exists(background_image_path):
+    background_image_path = "default_background.jpg"  # Fallback
+background_image = tk.PhotoImage(file=background_image_path)
 
 # Get dimensions of the background image
 background_width = background_image.width()
 background_height = background_image.height()
 
-# Canvas for Pokémon GIF and background
+# Set Tkinter window constraints
+root.maxsize(background_width, background_height)
+root.resizable(width=True, height=False)
+
+
+# Canvas for GIF and background
 canvas_width = 500
 canvas_height = 500
 canvas = tk.Canvas(root, width=canvas_width, height=canvas_height)
 canvas.pack(fill="both", expand=False)
-canvas.create_image(0,0, image=background_image, anchor="nw")
-
-# Set the window size and constraints
-root.geometry(f"{canvas_width}x{canvas_height}")
-root.minsize(canvas_width, canvas_height)
-root.maxsize(background_width, background_height)
-root.resizable(width=True, height=False)
+canvas.create_image(0, 0, image=background_image, anchor="nw")
 
 # Labels
-info_label, info_bg = create_label_with_background(canvas, "You start walking around the Kanto region...", 10, 10, 180, 20)
-encounter_label, encounter_bg = create_label_with_background(canvas, "Encounters: 0", 10, 40, 180, 20)
-shiny_label, shiny_bg = create_label_with_background(canvas, "Shiny Pokémon Found: 0", 10, 70, 180, 20)
-stats_label, stats_bg = create_label_with_background(canvas, "Time Elapsed: 0 seconds", 10, 100, 180, 20)
+info_label, info_bg = create_label_with_background(canvas, "Walking through the Kanto region...", 10, 10, 200, 20)
+encounter_label, encounter_bg = create_label_with_background(canvas, "Encounters: 0", 10, 40, 200, 20)
+shiny_label, shiny_bg = create_label_with_background(canvas, "Shiny Pokémon Found: 0", 10, 70, 200, 20)
+stats_label, stats_bg = create_label_with_background(canvas, "Time Elapsed: 0 seconds", 10, 100, 200, 20)
 
 initialize_shiny_count()
 
@@ -265,11 +257,20 @@ continue_button = tk.Button(
     bg="green",
     fg="white"
 )
-continue_button.place_forget() # Hide the button initially
+continue_button.place_forget()
 
 # Start timer and encounters
 initialize_timer()
 start_encounter_thread()
+
+# Handle window close event and ensure timer running variable is set to false
+def on_closing():
+    global timer_running
+    timer_running = False 
+    root.destroy()  # Close the Tkinter window
+
+# Register the on_closing function with the window close protocol
+root.protocol("WM_DELETE_WINDOW", on_closing)
 
 # Run the Tkinter event loop
 root.mainloop()
