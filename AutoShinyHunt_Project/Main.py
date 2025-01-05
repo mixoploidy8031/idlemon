@@ -1,3 +1,4 @@
+import os
 import random
 import time
 import threading
@@ -5,6 +6,58 @@ from PIL import Image, ImageTk
 import tkinter as tk
 from tkinter import ttk
 from colorama import Fore, Style
+
+# File to store the shiny Pokémon count
+SHINY_COUNT_FILE = "shiny_count.txt"
+
+# Load shiny count from txt file
+def load_shiny_count():
+    if os.path.exists(SHINY_COUNT_FILE):
+        with open(SHINY_COUNT_FILE, "r") as file:
+            try:
+                return int(file.read().strip())
+            except ValueError:
+                return 0 # Default 0 if file corrupted
+    return 0
+
+# Save shiny count to txt file
+def save_shiny_count(count):
+    with open(SHINY_COUNT_FILE, "w") as file:
+        file.write(str(count))
+
+# Update shiny count and save it
+def update_shiny_count():
+    global total_shiny_found
+    total_shiny_found += 1
+    shiny_label.config(text=f"Shiny Pokémon Found: {total_shiny_found}")
+    save_shiny_count(total_shiny_found) # Call save function
+    print(Fore.YELLOW + f"Shiny Pokémon count updated: {total_shiny_found}" + Style.RESET_ALL)
+
+# Initiaize shiny count from file
+def initialize_shiny_count():
+    global total_shiny_found
+    total_shiny_found = load_shiny_count()
+    shiny_label.config(text=f"Shiny Pokémon Found: {total_shiny_found}")
+    print(Fore.GREEN + f"Loaded shiny Pokémon count: {total_shiny_found}" + Style.RESET_ALL)
+
+# Handle shiny Pokémon encounter
+def handle_shiny_encounter(pokemon_name, pokemon_rarity):
+    global shiny_found, timer_running
+    shiny_found = True
+    info_label.config(
+        text=f"{pokemon_name} - {pokemon_rarity} (Shiny!)",
+        fg="gold"
+    )
+    print(Fore.YELLOW + f"Congrats!!! You found a shiny {pokemon_name}!" + Style.RESET_ALL)
+    update_shiny_count()
+    continue_button.place(relx=0.5, rely=0.5, anchor="center")
+    timer_running = False
+    
+##########################
+## BEGINNING OF PROGRAM ##
+##########################
+
+
 
 # Start of the adventure
 print(Fore.CYAN + "You start walking around the Kanto region..." + Style.RESET_ALL)
@@ -131,27 +184,13 @@ def start_encounter():
     
         # Break if shiny is found
         if is_shiny:
-            shiny_found = True
-            total_shiny_found += 1
-            shiny_label.config(text=f"Shiny Pokémon Found: {total_shiny_found}")
-            info_label.config(
-                text=f"{pokemon_name} - {pokemon_rarity} (Shiny!)",
-                fg="gold" # Set desired color for shiny Pokémon
-            )
-            print(Fore.YELLOW + f"Congrats!!! You found a shiny {pokemon_name}!" + Style.RESET_ALL)
-            continue_button.place(relx=0.5, rely=0.5, anchor="center") # Show "Continue" button
-            timer_running = False
+            handle_shiny_encounter(pokemon_name, pokemon_rarity)
         else:
             info_label.config(
                 text=f"{pokemon_name} - {pokemon_rarity}",
                 fg="white" # Set desired color for wild Pokémon
             )
             print(f"You encountered a wild {pokemon_name}!")
-        
-        
-        # Update elapsed time stats
-        #elapsed_time = time.time() - start_time
-        #stats_label.config(text=f"Time Elapsed: {int(elapsed_time)} seconds")
  
 # Start encounter simulation
 def start_encounter_thread():
@@ -214,6 +253,8 @@ info_label, info_bg = create_label_with_background(canvas, "You start walking ar
 encounter_label, encounter_bg = create_label_with_background(canvas, "Encounters: 0", 10, 40, 180, 20)
 shiny_label, shiny_bg = create_label_with_background(canvas, "Shiny Pokémon Found: 0", 10, 70, 180, 20)
 stats_label, stats_bg = create_label_with_background(canvas, "Time Elapsed: 0 seconds", 10, 100, 180, 20)
+
+initialize_shiny_count()
 
 # "Continue" button
 continue_button = tk.Button(
