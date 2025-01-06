@@ -96,4 +96,4 @@ The simulator uses a JSON file (`config.json`) to define key settings. Below are
 ---
 
 ## License
-This project is licensed under the MIT License. See the `LICENSE` file for details.
+This project is licensed under the MIT License

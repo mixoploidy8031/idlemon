@@ -3,12 +3,12 @@ import random
 import time
 import threading
 import base64
+import pygame
 from PIL import Image, ImageTk
 import tkinter as tk
 from tkinter import ttk
 from colorama import Fore, Style
 from config_loader import load_config, check_file_exists
-from pokemon_display import display_pokemon_gif
 from data_manager import load_shiny_count, save_shiny_count, load_pokemon_data
 
 # Load configuration
@@ -43,6 +43,9 @@ def initialize_shiny_count():
     total_shiny_found = load_shiny_count()
     shiny_label.config(text=f"Shiny Pokémon Found: {total_shiny_found}")
 
+# Initialize pygame mixer globally
+pygame.mixer.init()
+
 # Handle shiny Pokémon encounter
 def handle_shiny_encounter(pokemon_name, pokemon_rarity):
     global shiny_found, timer_running
@@ -52,6 +55,18 @@ def handle_shiny_encounter(pokemon_name, pokemon_rarity):
         fg="gold"
     )
     print(Fore.YELLOW + f"Congrats!!! You found a shiny {pokemon_name}!" + Style.RESET_ALL)
+    
+    # Play shiny encounter sound
+    shiny_sound_path = os.path.join("assets", "sounds", "shiny_sound1.wav")
+    if os.path.exists(shiny_sound_path):
+        try:
+            sound = pygame.mixer.Sound(shiny_sound_path)
+            sound.play()
+        except pygame.error as e:
+            print(f"Error playing shiny sound: {e}")
+    else:
+        print(f"Shiny sound file not found: {shiny_sound_path}")
+        
     update_shiny_count()
     continue_button.place(relx=0.5, rely=0.5, anchor="center")
     timer_running = False
@@ -133,6 +148,18 @@ def update_timer():
 # Handle the "Continue" button click
 def continue_hunt():
     global shiny_found, start_time, timer_running
+
+    # Play continue button sound
+    continue_sound_path = os.path.join("assets", "sounds", "continue_sound1.wav")
+    if os.path.exists(continue_sound_path):
+        try:
+            sound = pygame.mixer.Sound(continue_sound_path)
+            sound.play()  # Play the sound once
+        except pygame.error as e:
+            print(f"Error playing continue sound: {e}")
+    else:
+        print(f"Continue sound file not found: {continue_sound_path}")
+
     shiny_found = False
     start_time = time.time()
     continue_button.place_forget()
