@@ -1,4 +1,4 @@
-# Pokémon Encounter Simulator
+# Pokémon Hunting Simulator
 
 This project simulates encountering Pokémon with a chance of finding shiny Pokémon. It features animated GIFs for Pokémon encounters, shiny tracking, and customization options through a configuration file.
 
@@ -14,11 +14,11 @@ This project simulates encountering Pokémon with a chance of finding shiny Pok�
 
 ## Requirements
 - Python 3.8 or later
-- Required libraries: `Pillow`, `random`, `time`, `os`, `base64`
+- Required libraries: `Pillow`, `random`, `time`, `os`, `base64`, `pygame`, `tkinter`
 
 Install the dependencies:
 ```bash
-pip install pillow
+pip install pillow pygame
 ```
 
 ---
@@ -52,7 +52,7 @@ The simulator uses a JSON file (`config.json`) to define key settings. Below are
     gif_directory/
     ├── normal/
     │   ├── pikachu.gif
-    │   ├── charmander.gif
+    │   └── charmander.gif
     └── shiny/
         ├── pikachu.gif
         └── charmander.gif
@@ -64,13 +64,8 @@ The simulator uses a JSON file (`config.json`) to define key settings. Below are
     "background_image": "assets/backgrounds/forest.png"
     ```
 
-- **`shiny_count_file`:** Path to the file that stores the total number of shiny Pokémon found. 
-
-!! DELETING OR ALTERING FILE WILL RESULT IN RESETTING SHINY COUNT !!
-  - Example:
-    ```json
-    "shiny_count_file": "data/shiny_count.txt"
-    ```
+- **`shiny_count_file`:** Path to the file that stores the total number of shiny Pokémon found.  
+  ⚠ **WARNING:** Do not delete or modify the `shiny_count_file`. Any changes to this file will result in the shiny count resetting to `0` and may cause unintended behavior in the program.
 
 - **`pokemon_data_file`:** Path to the .txt file containing Pokémon data with name and rarity.
   - Example .txt format:
@@ -91,9 +86,11 @@ The simulator uses a JSON file (`config.json`) to define key settings. Below are
 
 ## Troubleshooting
 - **Missing GIFs:** Ensure the directory structure matches the example, and all Pokémon have corresponding `normal` and `shiny` GIFs.
+- **Shiny count reset:** If the `shiny_count.txt` file is missing, deleted, or modified, the shiny count will reset to `0`. To avoid this, do not alter the file manually.
 - **File errors:** If files like `shiny_count.txt` or `gen1_pokemon_names.txt` are missing, create blank files or use default values.
 
 ---
 
 ## License
-This project is licensed under the MIT License
+This project is licensed under the MIT License.
+
