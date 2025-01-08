@@ -40,8 +40,6 @@ The simulator uses a JSON file (`config.json`) to define key settings. Below are
 {
     "gif_directory": "path/to/gif/directory",
     "background_image": "path/to/background/image",
-    "shiny_count_file": "shiny_count.txt",
-    "pokemon_data_file": "gen1_pokemon_names.txt"
 }
 ```
 
@@ -49,7 +47,7 @@ The simulator uses a JSON file (`config.json`) to define key settings. Below are
 - **`gif_directory`:** Specifies the directory containing Pokémon GIFs. Subdirectories for `normal` and `shiny` Pokémon are required.
   - Example:
     ```
-    gif_directory/
+    gen1_gifs/
     ├── normal/
     │   ├── pikachu.gif
     │   └── charmander.gif
@@ -87,7 +85,6 @@ The simulator uses a JSON file (`config.json`) to define key settings. Below are
 ## Troubleshooting
 - **Missing GIFs:** Ensure the directory structure matches the example, and all Pokémon have corresponding `normal` and `shiny` GIFs.
 - **Shiny count reset:** If the `shiny_count.txt` file is missing, deleted, or modified, the shiny count will reset to `0`. To avoid this, do not alter the file manually.
-- **File errors:** If files like `shiny_count.txt` or `gen1_pokemon_names.txt` are missing, create blank files or use default values.
 
 ---
 
