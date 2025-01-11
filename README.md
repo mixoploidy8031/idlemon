@@ -38,8 +38,15 @@ The simulator uses a JSON file (`config.json`) to define key settings. Below are
 ### Example `config.json`
 ```json
 {
-    "gif_directory": "path/to/gif/directory",
+    "gif_directory": "path/to/gif_directory/assets/gen1_gifs",
     "background_image": "path/to/background/image",
+}
+```
+
+For Windows, `gif_directory` should look like:
+```json
+{
+    "gif_directory": "C:\\path\\to\\gif_directory\\assets\\gen1_gifs"
 }
 ```
 
