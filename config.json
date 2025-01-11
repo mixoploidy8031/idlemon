@@ -1,0 +1,5 @@
+{
+    "gif_directory": "assets/gifs",
+    "background_image": "assets/images/default_background.jpg",
+    "mute_audio": false
+}
