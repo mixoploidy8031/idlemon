@@ -3,8 +3,17 @@ import os
 import sys
 from pathlib import Path
 
-# Get the project root directory (parent of src)
-PROJECT_ROOT = Path(__file__).parent.parent
+def get_base_path():
+    """Get the base path for the application, works both for dev and PyInstaller"""
+    if getattr(sys, 'frozen', False):
+        # If the application is run as a bundle (PyInstaller)
+        return sys._MEIPASS
+    else:
+        # If running in development
+        return str(Path(__file__).parent.parent)
+
+# Replace PROJECT_ROOT definition with:
+PROJECT_ROOT = Path(get_base_path())
 
 DEFAULT_CONFIG = {
     "encounter_delay": 2.5, # Default is 2.5 seconds
