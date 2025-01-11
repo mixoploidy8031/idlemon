@@ -21,7 +21,7 @@ This project simulates encountering Pok√©mon with a chance of finding shiny Pok√
   - Toggle sound effects on/off
 
 ---
-
+![Screenshot 2025-01-11 015653](https://github.com/user-attachments/assets/6939a1db-e5e2-43cb-8a5f-755b7087ad3a)
 ## Requirements
 - Python 3.8 or later
 - Required libraries: `Pillow`, `pygame`, `tkinter`, `colorama`
