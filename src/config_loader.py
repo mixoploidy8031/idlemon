@@ -7,7 +7,7 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).parent.parent
 
 DEFAULT_CONFIG = {
-    "encounter_delay": 1.0, # Default is 2.5 seconds
+    "encounter_delay": 2.5, # Default is 2.5 seconds
     "rarity_weights": {
         "Very Common": 40, # Default is 40
         "Common": 34, # Default is 34
@@ -15,7 +15,7 @@ DEFAULT_CONFIG = {
         "Rare": 5, # Default is 5
         "Very Rare": 1 # Default is 1
     },
-    "shiny_rate": 20, # Default is 2000
+    "shiny_rate": 2000, # Default is 2000
     "mute_audio": False,  # Add default mute setting
     "shiny_count_file": "logs/shiny_count.bin",
     "pokemon_data_file": "assets/data/gen1_pokemon_names.txt",
