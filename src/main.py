@@ -12,7 +12,16 @@ from logger import logger
 from pathlib import Path
 import sys
 
-PROJECT_ROOT = Path(__file__).parent.parent
+def get_base_path():
+    """Get the base path for the application, works both for dev and PyInstaller"""
+    if getattr(sys, 'frozen', False):
+        # If the application is run as a bundle (PyInstaller)
+        return sys._MEIPASS
+    else:
+        # If running in development
+        return str(Path(__file__).parent.parent)
+
+PROJECT_ROOT = Path(get_base_path())
 
 # Load configuration
 config = load_config()
@@ -107,7 +116,7 @@ def handle_shiny_encounter(pokemon_name, pokemon_rarity):
     
     # Play shiny encounter sound only if not muted
     if not mute_audio:
-        shiny_sound_path = PROJECT_ROOT / "assets" / "sounds" / "shiny_sound1.wav"
+        shiny_sound_path = Path(PROJECT_ROOT) / "assets" / "sounds" / "shiny_sound1.wav"
         if os.path.exists(shiny_sound_path):
             try:
                 sound = pygame.mixer.Sound(shiny_sound_path)
@@ -234,7 +243,7 @@ def continue_hunt():
 
     # Play continue button sound only if not muted
     if not mute_audio:
-        continue_sound_path = PROJECT_ROOT / "assets" / "sounds" / "continue_sound1.wav"
+        continue_sound_path = Path(PROJECT_ROOT) / "assets" / "sounds" / "continue_sound1.wav"
         if os.path.exists(continue_sound_path):
             try:
                 sound = pygame.mixer.Sound(continue_sound_path)
