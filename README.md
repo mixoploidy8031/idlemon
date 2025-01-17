@@ -21,6 +21,7 @@ This project simulates encountering Pok√©mon with a chance of finding shiny Pok√
   - Toggle sound effects on/off
 
 ---
+
 ![Screenshot 2025-01-11 015653](https://github.com/user-attachments/assets/6939a1db-e5e2-43cb-8a5f-755b7087ad3a)
 ## Requirements
 - Python 3.8 or later
@@ -30,13 +31,16 @@ Install dependencies:
 ```bash
 pip install pillow pygame colorama
 ```
-
---- 
-## Usage
+--- ## Usage
 
 Option 1: Run from source
 1. Clone the repository
-2. Run the simulator from the project root:
+2. Open a terminal in the root directory of idlemon
+3. Run the following command to package as an executable:
+   ```bash
+   pyinstaller src/main.spec
+   ```
+   Alternatively, you can just run the simulator directly:
    ```bash
    python src/main.py
    ```
@@ -44,7 +48,9 @@ Option 1: Run from source
 Option 2: Run executable
 1. Download the latest release
 2. Extract the zip file
-3. Run IdleMon.exe
+3. Navigate to the `src` folder
+4. Run IdleMon.exe from the `src` folder
+5. Alternatively, create a shortcut to IdleMon.exe and place the shortcut in a location of your choosing
 
 ---
 
