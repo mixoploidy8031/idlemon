@@ -31,7 +31,8 @@ Install dependencies:
 ```bash
 pip install pillow pygame colorama
 ```
---- ## Usage
+--- 
+## Usage
 
 Option 1: Run from source
 1. Clone the repository
