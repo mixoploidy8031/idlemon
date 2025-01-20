@@ -2,13 +2,13 @@ import os
 import logging
 from datetime import datetime
 from pathlib import Path
-
-PROJECT_ROOT = Path(__file__).parent.parent
+from config_loader import get_base_path
 
 class LogManager:
     def __init__(self):
-        # Create logs directory if it doesn't exist
-        self.logs_dir = PROJECT_ROOT / "logs"
+        base_path = get_base_path()
+        # Use data path for writing logs
+        self.logs_dir = base_path['data'] / "logs"
         self.logs_dir.mkdir(exist_ok=True)
 
         # Configure error logger

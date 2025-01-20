@@ -4,16 +4,25 @@ import sys
 from pathlib import Path
 
 def get_base_path():
-    """Get the base path for the application, works both for dev and PyInstaller"""
+    # Get the base path for the application, works both for dev and PyInstaller
     if getattr(sys, 'frozen', False):
         # If the application is run as a bundle (PyInstaller)
-        return sys._MEIPASS
+        exe_dir = Path(sys.executable).parent
+        # Use _MEIPASS for reading resources, but exe_dir for writing data
+        return {
+            'runtime': Path(sys._MEIPASS),  # For reading resources
+            'data': exe_dir  # For writing data files
+        }
     else:
         # If running in development
-        return str(Path(__file__).parent.parent)
+        dev_path = Path(__file__).parent.parent
+        return {
+            'runtime': dev_path,
+            'data': dev_path
+        }
 
 # Replace PROJECT_ROOT definition with:
-PROJECT_ROOT = Path(get_base_path())
+PROJECT_ROOT = get_base_path()
 
 DEFAULT_CONFIG = {
     "encounter_delay": 2.5, # Default is 2.5 seconds
@@ -190,14 +199,14 @@ Zubat,Common
 
 class ConfigManager:
     def __init__(self, config_file="config.json"):
-        self.config_file = str(PROJECT_ROOT / config_file)
+        self.config_file = str(PROJECT_ROOT['data'] / config_file)
         # Create necessary directories relative to project root
-        (PROJECT_ROOT / "logs").mkdir(exist_ok=True)
-        (PROJECT_ROOT / "assets/data").mkdir(parents=True, exist_ok=True)
-        (PROJECT_ROOT / "assets/gifs/normal").mkdir(parents=True, exist_ok=True)
-        (PROJECT_ROOT / "assets/gifs/shiny").mkdir(parents=True, exist_ok=True)
-        (PROJECT_ROOT / "assets/images").mkdir(parents=True, exist_ok=True)
-        (PROJECT_ROOT / "assets/sounds").mkdir(parents=True, exist_ok=True)
+        (PROJECT_ROOT['data'] / "logs").mkdir(exist_ok=True)
+        (PROJECT_ROOT['data'] / "assets/data").mkdir(parents=True, exist_ok=True)
+        (PROJECT_ROOT['data'] / "assets/gifs/normal").mkdir(parents=True, exist_ok=True)
+        (PROJECT_ROOT['data'] / "assets/gifs/shiny").mkdir(parents=True, exist_ok=True)
+        (PROJECT_ROOT['data'] / "assets/images").mkdir(parents=True, exist_ok=True)
+        (PROJECT_ROOT['data'] / "assets/sounds").mkdir(parents=True, exist_ok=True)
         self.config = self.load_config()
 
     def load_config(self):
@@ -216,7 +225,7 @@ class ConfigManager:
         path_keys = ["shiny_count_file", "pokemon_data_file", "shinies_encounter_file", "gif_directory"]
         for key in path_keys:
             if not os.path.isabs(config[key]):
-                config[key] = str(PROJECT_ROOT / config[key])
+                config[key] = str(PROJECT_ROOT['data'] / config[key])
         
         # Background image can be absolute or relative, handled in main.py
         

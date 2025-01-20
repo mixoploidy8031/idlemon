@@ -3,7 +3,7 @@ import random
 import time
 import threading
 import pygame
-from PIL import Image, ImageTk
+from PIL import Image, ImageTk 
 import tkinter as tk
 from colorama import Fore, Style
 from config_loader import load_config, check_file_exists
@@ -12,16 +12,20 @@ from logger import logger
 from pathlib import Path
 import sys
 
+print("Starting application...")
+print(f"Executable path: {sys.executable}")
+print(f"Working directory: {os.getcwd()}")
+
 def get_base_path():
-    """Get the base path for the application, works both for dev and PyInstaller"""
+    # Determine base path for development and PyInstaller
     if getattr(sys, 'frozen', False):
         # If the application is run as a bundle (PyInstaller)
-        return sys._MEIPASS
+        return Path(sys.executable).parent
     else:
         # If running in development
-        return str(Path(__file__).parent.parent)
+        return Path(__file__).parent.parent
 
-PROJECT_ROOT = Path(get_base_path())
+PROJECT_ROOT = get_base_path()
 
 # Load configuration
 config = load_config()
@@ -71,7 +75,7 @@ else:
     # If it's a relative path, use it relative to project root
     background_path = PROJECT_ROOT / background_image_path
 
-# If the specified path doesn't exist, fall back to default
+# Fallback to default background if specified path doesn't exist
 if not check_file_exists(background_path):
     print(f"Warning: Could not find background image at {background_path}")
     print("Falling back to default background...")
@@ -114,9 +118,9 @@ def handle_shiny_encounter(pokemon_name, pokemon_rarity):
     )
     print(Fore.YELLOW + f"Congrats!!! You found a shiny {pokemon_name} after {total_encounters} encounters!" + Style.RESET_ALL)
     
-    # Play shiny encounter sound only if not muted
+    # Play shiny encounter sound if not muted
     if not mute_audio:
-        shiny_sound_path = Path(PROJECT_ROOT) / "assets" / "sounds" / "shiny_sound1.wav"
+        shiny_sound_path = PROJECT_ROOT / "assets" / "sounds" / "shiny_sound1.wav"
         if os.path.exists(shiny_sound_path):
             try:
                 sound = pygame.mixer.Sound(shiny_sound_path)
@@ -168,10 +172,9 @@ def display_pokemon_gif(pokemon_name, is_shiny=False):
         root.after_cancel(display_pokemon_gif.after_id)
         display_pokemon_gif.after_id = None
 
-    # Only load new frames if it's a different GIF file
+    # Load new frames if it's a different GIF file
     if not hasattr(display_pokemon_gif, 'current_gif_path') or new_gif_path != display_pokemon_gif.current_gif_path:
         try:
-            # Open the GIF
             image = Image.open(new_gif_path)
             frames = []  # Store frames in the global variable
             
@@ -207,12 +210,14 @@ def display_pokemon_gif(pokemon_name, is_shiny=False):
         center_y = (canvas_height * 5) // 6
         
         try:
+            # Add bounds checking
+            current_frame = frame_index % len(frames)
             # Add the current frame of the Pokémon GIF to the canvas
-            canvas.create_image(center_x, center_y, image=frames[frame_index], tag="pokemon_gif")
+            canvas.create_image(center_x, center_y, image=frames[current_frame], tag="pokemon_gif")
             
             # Schedule next frame with appropriate delay
             display_pokemon_gif.after_id = root.after(FRAME_DELAY, animate, (frame_index + 1) % len(frames))
-        except IndexError:
+        except (IndexError, ZeroDivisionError) as e:
             print(f"Animation error: frame_index={frame_index}, frames length={len(frames)}")
             return
     
@@ -241,9 +246,9 @@ def continue_hunt():
     total_encounters = 0
     encounter_label.config(text=f"Encounters: {total_encounters}")
 
-    # Play continue button sound only if not muted
+    # Play continue button sound if not muted
     if not mute_audio:
-        continue_sound_path = Path(PROJECT_ROOT) / "assets" / "sounds" / "continue_sound1.wav"
+        continue_sound_path = PROJECT_ROOT / "assets" / "sounds" / "continue_sound1.wav"
         if os.path.exists(continue_sound_path):
             try:
                 sound = pygame.mixer.Sound(continue_sound_path)
@@ -298,7 +303,7 @@ def start_encounter():
         else:
             info_label.config(
                 text=f"{pokemon_name} - {pokemon_rarity}",
-                fg="white"  # Reset color to white for normal Pokémon
+                fg="white"
             )
             print(f"You encountered a wild {pokemon_name}!")
 

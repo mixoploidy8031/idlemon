@@ -1,6 +1,6 @@
 import os
 import base64
-from config_loader import load_config
+from config_loader import load_config, get_base_path
 from logger import logger
 
 # Load configuration
@@ -9,8 +9,11 @@ shiny_count_file = config["shiny_count_file"]
 
 class DataManager:
     def __init__(self, config):
-        self.shiny_count_file = config["shiny_count_file"]
-        self.pokemon_data_file = config["pokemon_data_file"]
+        base_path = get_base_path()
+        # Use data path for files that need to be written to
+        self.shiny_count_file = base_path['data'] / "logs/shiny_count.bin"
+        # Use runtime path for read-only files
+        self.pokemon_data_file = base_path['runtime'] / config["pokemon_data_file"]
 
     def load_shiny_count(self):
         if os.path.exists(self.shiny_count_file):

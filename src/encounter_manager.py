@@ -1,4 +1,6 @@
 import random
+
+from colorama import Fore, Style
 from data_manager import save_shiny_count
 from logger import logger
 
