@@ -2,7 +2,7 @@
 
 This project simulates encountering Pokémon with a chance of finding shiny Pokémon. It features animated GIFs for Pokémon encounters, shiny tracking, encounter statistics, and customization options.
 
-![icon](assets/images/icon.png)
+![icon](assets/images/icon_png.png)
 
 ---
 
@@ -22,7 +22,7 @@ This project simulates encountering Pokémon with a chance of finding shiny Pok�
   - Choose your own background image
   - Toggle sound effects on/off
 
-![screenshot of shiny gyrados encounter](assets/images/screenshot_gyrados.png)
+![screenshot of shiny gyrados encounter](assets/images/screenshot_gyra.png)
 
 ---
 
