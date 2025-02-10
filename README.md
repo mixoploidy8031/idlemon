@@ -87,15 +87,30 @@ project_root/
 │   └── logger.py
 ├── assets/
 │   ├── gifs/
-│   │   ├── normal/
-│   │   │   └── pokemon.gif
-│   │   └── shiny/
-│   │       └── pokemon.gif
+│   │   ├── gen1/
+│   │   │   ├── normal/
+│   │   │   └── shiny/
+│   │   ├── gen2/
+│   │   │   ├── normal/
+│   │   │   └── shiny/
+│   │   ├── gen3/
+│   │   │   ├── normal/
+│   │   │   └── shiny/
+│   │   ├── gen4/
+│   │   │   ├── normal/
+│   │   │   └── shiny/
+│   │   └── gen5/
+│   │       ├── normal/
+│   │       └── shiny/
 │   ├── sounds/
 │   │   ├── shiny_sound1.wav
 │   │   └── continue_sound1.wav
 │   ├── data/
-│   │   └── gen1_pokemon_names.txt
+│   │   ├── gen1_pokemon_names.txt
+│   │   ├── gen2_pokemon_names.txt
+│   │   ├── gen3_pokemon_names.txt
+│   │   ├── gen4_pokemon_names.txt
+│   │   └── gen5_pokemon_names.txt
 │   └── images/
 │       └── background.png
 ├── logs/
@@ -149,7 +164,7 @@ New files will be automatically created on next launch.
 ---
 
 ## Troubleshooting
-- **Missing GIFs:** Ensure GIF files exist in both normal/shiny directories
+- **Missing GIFs:** Ensure GIF files exist in the correct generation's normal/shiny directories
 - **Animation Issues:** Verify GIF files are properly formatted
 - **Sound Problems:** Check that sound files exist in the assets/sounds directory
 - **Background Image:** Ensure the specified path exists and is accessible

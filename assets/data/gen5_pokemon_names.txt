@@ -1,0 +1,156 @@
+Victini,Very Rare
+Snivy,Rare
+Servine,Semi-rare
+Serperior,Very Rare
+Tepig,Rare
+Pignite,Semi-rare
+Emboar,Very Rare
+Oshawott,Rare
+Dewott,Semi-rare
+Samurott,Very Rare
+Patrat,Very Common
+Watchog,Common
+Lillipup,Very Common
+Herdier,Common
+Stoutland,Rare
+Purrloin,Very Common
+Liepard,Rare
+Pansage,Very Common
+Simisage,Rare
+Pansear,Very Common
+Simisear,Rare
+Panpour,Very Common
+Simipour,Rare
+Munna,Very Common
+Musharna,Rare
+Pidove,Very Common
+Tranquill,Common
+Unfezant,Rare
+Blitzle,Very Common
+Zebstrika,Rare
+Roggenrola,Very Common
+Boldore,Common
+Gigalith,Rare
+Woobat,Very Common
+Swoobat,Rare
+Drilbur,Very Common
+Excadrill,Rare
+Audino,Rare
+Timburr,Very Common
+Gurdurr,Common
+Conkeldurr,Rare
+Tympole,Very Common
+Palpitoad,Common
+Seismitoad,Rare
+Throh,Very Common
+Sawk,Rare
+Sewaddle,Very Common
+Swadloon,Common
+Leavanny,Rare
+Venipede,Very Common
+Whirlipede,Common
+Scolipede,Rare
+Cottonee,Very Common
+Whimsicott,Rare
+Petilil,Very Common
+Lilligant,Rare
+Basculin,Common
+Sandile,Very Common
+Krokorok,Common
+Krookodile,Rare
+Darumaka,Very Common
+Darmanitan,Rare
+Maractus,Rare
+Dwebble,Very Common
+Crustle,Rare
+Scraggy,Very Common
+Scrafty,Rare
+Sigilyph,Rare
+Yamask,Very Common
+Cofagrigus,Rare
+Tirtouga,Very Common
+Carracosta,Rare
+Archen,Very Common
+Archeops,Rare
+Trubbish,Very Common
+Garbodor,Rare
+Zorua,Very Common
+Zoroark,Rare
+Minccino,Very Common
+Cinccino,Rare
+Gothita,Very Common
+Gothorita,Common
+Gothitelle,Rare
+Solosis,Very Common
+Duosion,Common
+Reuniclus,Rare
+Ducklett,Very Common
+Swanna,Rare
+Vanillite,Very Common
+Vanillish,Common
+Vanilluxe,Rare
+Deerling,Very Common
+Sawsbuck,Rare
+Emolga,Very Common
+Karrablast,Very Common
+Escavalier,Rare
+Foongus,Very Common
+Amoonguss,Rare
+Frillish,Very Common
+Jellicent,Rare
+Alomomola,Rare
+Joltik,Very Common
+Galvantula,Rare
+Ferroseed,Very Common
+Ferrothorn,Rare
+Klink,Very Common
+Klang,Common
+Klinklang,Rare
+Tynamo,Very Common
+Eelektrik,Common
+Eelektross,Rare
+Elgyem,Very Common
+Beheeyem,Rare
+Litwick,Very Common
+Lampent,Common
+Chandelure,Rare
+Axew,Very Common
+Fraxure,Common
+Haxorus,Rare
+Cubchoo,Very Common
+Beartic,Rare
+Cryogonal,Very Common
+Shelmet,Common
+Accelgor,Rare
+Stunfisk,Very Common
+Mienfoo,Very Common
+Mienshao,Rare
+Druddigon,Rare
+Golett,Very Common
+Golurk,Rare
+Pawniard,Very Common
+Bisharp,Rare
+Bouffalant,Very Common
+Rufflet,Common
+Braviary,Rare
+Vullaby,Very Common
+Mandibuzz,Rare
+Heatmor,Rare
+Durant,Very Common
+Deino,Very Common
+Zweilous,Common
+Hydreigon,Rare
+Larvesta,Very Common
+Volcarona,Rare
+Cobalion,Very Rare
+Terrakion,Very Rare
+Virizion,Very Rare
+Tornadus,Very Rare
+Thundurus,Very Rare
+Reshiram,Very Rare
+Zekrom,Very Rare
+Landorus,Very Rare
+Kyurem,Very Rare
+Keldeo,Very Rare
+Meloetta,Very Rare
+Genesect,Very Rare

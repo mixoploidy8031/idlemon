@@ -24,191 +24,70 @@ def get_base_path():
 # Replace PROJECT_ROOT definition with:
 PROJECT_ROOT = get_base_path()
 
+# Pre-calculated hashes for Pokemon data files
+POKEMON_DATA_HASHES = {
+    "gen1": "bb1fd5dbb801d1e8f453d39eedc85f20fb96c804613041b236581e4037645b5f",
+    "gen2": "6bac78b82268154f307cbdff766e2d71c67f48881bd296f5f1d1ac6af556b5c3",
+    "gen3": "edc5d92ae40dd6d8cc7205537d58b570fede40970ba2cfd8bb9e7ab3241d21cb",
+    "gen4": "56e5512eff1684bf4fac1d512d5ab8fd9fe49c1058260f85e3a43a57fbd8b8eb",
+    "gen5": "35f7fbd7e12604d46517389f8d1133f06e67d93b3dbe4fc6b894f26b658c0f73"
+}
+
 DEFAULT_CONFIG = {
     "encounter_delay": 2.5, # Default is 2.5 seconds
     "rarity_weights": {
-        "Very Common": 40, # Default is 40
-        "Common": 34, # Default is 34
-        "Semi-rare": 20, # Default is 20
-        "Rare": 5, # Default is 5
+        "Very Common": 45, # Default is 40
+        "Common": 30, # Default is 34
+        "Semi-rare": 17, # Default is 20
+        "Rare": 7, # Default is 5
         "Very Rare": 1 # Default is 1
     },
     "shiny_rate": 2000, # Default is 2000
     "mute_audio": False,  # Add default mute setting
     "shiny_count_file": "logs/shiny_count.bin",
-    "pokemon_data_file": "assets/data/gen1_pokemon_names.txt",
+    "pokemon_data_files": {  # Updated to support multiple generations
+        "gen1": "assets/data/gen1_pokemon_names.txt",
+        "gen2": "assets/data/gen2_pokemon_names.txt",
+        "gen3": "assets/data/gen3_pokemon_names.txt",
+        "gen4": "assets/data/gen4_pokemon_names.txt",
+        "gen5": "assets/data/gen5_pokemon_names.txt"
+    },
+    "current_generation": "gen1",  # Add default generation setting
     "shinies_encounter_file": "logs/shinies_encountered.txt",
     "gif_directory": "assets/gifs",
     "background_image": "assets/images/default_background.jpg",
 }
 
-# Default Pokémon data
-DEFAULT_POKEMON_DATA = """
-Abra,Semi-rare
-Aerodactyl,Very Rare
-Alakazam,Semi-rare
-Arbok,Semi-rare
-Arcanine,Very Rare
-Articuno,Very Rare
-Beedrill,Semi-rare
-Bellsprout,Common
-Blastoise,Very Rare
-Bulbasaur,Semi-rare
-Butterfree,Semi-rare
-Caterpie,Very Common
-Chansey,Semi-rare
-Charizard,Very Rare
-Charmander,Semi-rare
-Charmeleon,Rare
-Clefable,Rare
-Clefairy,Common
-Cloyster,Semi-rare
-Cubone,Common
-Dewgong,Semi-rare
-Diglett,Common
-Ditto,Semi-rare
-Dodrio,Semi-rare
-Doduo,Common
-Dragonair,Rare
-Dragonite,Very Rare
-Dratini,Semi-rare
-Drowzee,Semi-rare
-Dugtrio,Semi-rare
-Eevee,Semi-rare
-Ekans,Common
-Electabuzz,Semi-rare
-Electrode,Semi-rare
-Exeggcute,Common
-Exeggutor,Semi-rare
-Farfetch'd,Semi-rare
-Fearow,Semi-rare
-Flareon,Semi-rare
-Gastly,Semi-rare
-Gengar,Semi-rare
-Geodude,Common
-Gloom,Common
-Golbat,Semi-rare
-Goldeen,Common
-Golduck,Semi-rare
-Golem,Very Rare
-Graveler,Semi-rare
-Grimer,Common
-Growlithe,Common
-Gyarados,Rare
-Haunter,Semi-rare
-Hitmonchan,Semi-rare
-Hitmonlee,Semi-rare
-Horsea,Common
-Hypno,Semi-rare
-Ivysaur,Rare
-Jigglypuff,Common
-Jolteon,Semi-rare
-Jynx,Semi-rare
-Kabuto,Semi-rare
-Kabutops,Semi-rare
-Kadabra,Semi-rare
-Kakuna,Common
-Kangaskhan,Very Rare
-Kingler,Semi-rare
-Koffing,Common
-Krabby,Common
-Lapras,Semi-rare
-Lickitung,Semi-rare
-Machamp,Rare
-Machoke,Semi-rare
-Machop,Common
-Magikarp,Very Common
-Magmar,Semi-rare
-Magnemite,Common
-Magneton,Semi-rare
-Mankey,Common
-Marowak,Semi-rare
-Meowth,Common
-Metapod,Common
-Mew,Very Rare
-Mewtwo,Very Rare
-Moltres,Very Rare
-Mr. Mime,Semi-rare
-Muk,Semi-rare
-Nidoking,Semi-rare
-Nidoqueen,Semi-rare
-Nidoran♀,Common
-Nidoran♂,Common
-Nidorina,Common
-Nidorino,Semi-rare
-Ninetales,Semi-rare
-Oddish,Common
-Omanyte,Semi-rare
-Omastar,Semi-rare
-Onix,Common
-Paras,Common
-Parasect,Semi-rare
-Persian,Semi-rare
-Pidgeot,Semi-rare
-Pidgeotto,Common
-Pidgey,Very Common
-Pikachu,Semi-rare
-Pinsir,Semi-rare
-Poliwag,Common
-Poliwhirl,Semi-rare
-Poliwrath,Semi-rare
-Ponyta,Common
-Porygon,Rare
-Primeape,Semi-rare
-Psyduck,Common
-Raichu,Semi-rare
-Rapidash,Semi-rare
-Raticate,Common
-Rattata,Very Common
-Rhydon,Semi-rare
-Rhyhorn,Common
-Sandshrew,Common
-Sandslash,Semi-rare
-Scyther,Semi-rare
-Seadra,Semi-rare
-Seaking,Common
-Seel,Common
-Shellder,Common
-Slowbro,Semi-rare
-Slowpoke,Common
-Snorlax,Very Rare
-Spearow,Common
-Squirtle,Semi-rare
-Starmie,Semi-rare
-Staryu,Common
-Tangela,Semi-rare
-Tauros,Common
-Tentacool,Common
-Tentacruel,Semi-rare
-Vaporeon,Semi-rare
-Venomoth,Semi-rare
-Venonat,Common
-Venusaur,Very Rare
-Victreebel,Semi-rare
-Vileplume,Semi-rare
-Voltorb,Common
-Vulpix,Common
-Wartortle,Rare
-Weedle,Very Common
-Weepinbell,Common
-Weezing,Semi-rare
-Wigglytuff,Semi-rare
-Zapdos,Very Rare
-Zubat,Common
-"""
-
 class ConfigManager:
     def __init__(self, config_file="config.json"):
         self.config_file = str(PROJECT_ROOT['data'] / config_file)
-        # Create necessary directories relative to project root
+        # Update directory creation to include gen2-5 directories
         (PROJECT_ROOT['data'] / "logs").mkdir(exist_ok=True)
         (PROJECT_ROOT['data'] / "assets/data").mkdir(parents=True, exist_ok=True)
-        (PROJECT_ROOT['data'] / "assets/gifs/normal").mkdir(parents=True, exist_ok=True)
-        (PROJECT_ROOT['data'] / "assets/gifs/shiny").mkdir(parents=True, exist_ok=True)
+        for gen in range(1, 6):
+            (PROJECT_ROOT['data'] / f"assets/gifs/gen{gen}/normal").mkdir(parents=True, exist_ok=True)
+            (PROJECT_ROOT['data'] / f"assets/gifs/gen{gen}/shiny").mkdir(parents=True, exist_ok=True)
         (PROJECT_ROOT['data'] / "assets/images").mkdir(parents=True, exist_ok=True)
         (PROJECT_ROOT['data'] / "assets/sounds").mkdir(parents=True, exist_ok=True)
         self.config = self.load_config()
 
+    def validate_pokemon_data(self, file_path):
+        import hashlib
+        
+        gen = os.path.basename(file_path).split('_')[0]  # Extract gen1, gen2, etc.
+        if not os.path.exists(file_path):
+            print(f"Error: {file_path} not found. Please ensure all Pokemon data files are present.")
+            sys.exit(1)
+            
+        with open(file_path, "rb") as file:
+            file_hash = hashlib.sha256(file.read()).hexdigest()
+            
+        if file_hash != POKEMON_DATA_HASHES[gen]:
+            print(f"Warning: {file_path} may have been modified. Hash verification failed.")
+            print(f"Expected hash: {POKEMON_DATA_HASHES[gen]}")
+            print(f"Actual hash: {file_hash}")
+            sys.exit(1)  # Exit if hash verification fails
+            
     def load_config(self):
         user_config = {}
         if os.path.exists(self.config_file):
@@ -222,35 +101,25 @@ class ConfigManager:
         config = {**DEFAULT_CONFIG, **user_config}
         
         # Convert relative paths to absolute paths if they're not already absolute
-        path_keys = ["shiny_count_file", "pokemon_data_file", "shinies_encounter_file", "gif_directory"]
+        path_keys = ["shiny_count_file", "shinies_encounter_file", "gif_directory"]
         for key in path_keys:
             if not os.path.isabs(config[key]):
                 config[key] = str(PROJECT_ROOT['data'] / config[key])
         
+        # Handle pokemon_data_files paths separately since it's a dictionary
+        if not os.path.isabs(next(iter(config["pokemon_data_files"].values()))):
+            config["pokemon_data_files"] = {
+                gen: str(PROJECT_ROOT['data'] / path)
+                for gen, path in config["pokemon_data_files"].items()
+            }
+        
         # Background image can be absolute or relative, handled in main.py
         
-        self.validate_pokemon_data(config["pokemon_data_file"])
+        # Validate all generation files
+        for file_path in config["pokemon_data_files"].values():
+            self.validate_pokemon_data(file_path)
+            
         return config
-
-    def validate_pokemon_data(self, file_path):
-        # Create directory if it doesn't exist
-        os.makedirs(os.path.dirname(file_path), exist_ok=True)
-        
-        default_lines = [line.strip() for line in DEFAULT_POKEMON_DATA.strip().split("\n")]
-        
-        if not os.path.exists(file_path):
-            print(f"{file_path} not found. Creating with default data.")
-            with open(file_path, "w", encoding="utf-8") as file:
-                file.write("\n".join(default_lines) + "\n")
-            return
-
-        with open(file_path, "r", encoding="utf-8") as file:
-            existing_lines = [line.strip() for line in file.readlines()]
-
-        if existing_lines != default_lines:
-            print(f"{file_path} is corrupted or altered. Replacing with default data.")
-            with open(file_path, "w", encoding="utf-8") as file:
-                file.write("\n".join(default_lines) + "\n")
 
 # Helper functions to maintain backwards compatibility
 def load_config():

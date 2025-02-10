@@ -1,151 +1,151 @@
-Abra,Semi-rare
-Aerodactyl,Very Rare
-Alakazam,Semi-rare
-Arbok,Semi-rare
-Arcanine,Very Rare
-Articuno,Very Rare
-Beedrill,Semi-rare
-Bellsprout,Common
-Blastoise,Very Rare
 Bulbasaur,Semi-rare
-Butterfree,Semi-rare
-Caterpie,Very Common
-Chansey,Semi-rare
-Charizard,Very Rare
+Ivysaur,Rare
+Venusaur,Very Rare
 Charmander,Semi-rare
 Charmeleon,Rare
-Clefable,Rare
-Clefairy,Common
-Cloyster,Semi-rare
-Cubone,Common
-Dewgong,Semi-rare
-Diglett,Common
-Ditto,Semi-rare
-Dodrio,Semi-rare
-Doduo,Common
-Dragonair,Rare
-Dragonite,Very Rare
-Dratini,Semi-rare
-Drowzee,Semi-rare
-Dugtrio,Semi-rare
-Eevee,Semi-rare
-Ekans,Common
-Electabuzz,Semi-rare
-Electrode,Semi-rare
-Exeggcute,Common
-Exeggutor,Semi-rare
-Farfetch'd,Semi-rare
-Fearow,Semi-rare
-Flareon,Semi-rare
-Gastly,Semi-rare
-Gengar,Semi-rare
-Geodude,Common
-Gloom,Common
-Golbat,Semi-rare
-Goldeen,Common
-Golduck,Semi-rare
-Golem,Very Rare
-Graveler,Semi-rare
-Grimer,Common
-Growlithe,Common
-Gyarados,Rare
-Haunter,Semi-rare
-Hitmonchan,Semi-rare
-Hitmonlee,Semi-rare
-Horsea,Common
-Hypno,Semi-rare
-Ivysaur,Rare
-Jigglypuff,Common
-Jolteon,Semi-rare
-Jynx,Semi-rare
-Kabuto,Semi-rare
-Kabutops,Semi-rare
-Kadabra,Semi-rare
-Kakuna,Common
-Kangaskhan,Very Rare
-Kingler,Semi-rare
-Koffing,Common
-Krabby,Common
-Lapras,Semi-rare
-Lickitung,Semi-rare
-Machamp,Rare
-Machoke,Semi-rare
-Machop,Common
-Magikarp,Very Common
-Magmar,Semi-rare
-Magnemite,Common
-Magneton,Semi-rare
-Mankey,Common
-Marowak,Semi-rare
-Meowth,Common
+Charizard,Very Rare
+Squirtle,Semi-rare
+Wartortle,Rare
+Blastoise,Very Rare
+Caterpie,Very Common
 Metapod,Common
-Mew,Very Rare
-Mewtwo,Very Rare
-Moltres,Very Rare
-Mr. Mime,Semi-rare
-Muk,Semi-rare
-Nidoking,Semi-rare
-Nidoqueen,Semi-rare
+Butterfree,Semi-rare
+Weedle,Very Common
+Kakuna,Common
+Beedrill,Semi-rare
+Pidgey,Very Common
+Pidgeotto,Common
+Pidgeot,Semi-rare
+Rattata,Very Common
+Raticate,Common
+Spearow,Common
+Fearow,Semi-rare
+Ekans,Common
+Arbok,Semi-rare
+Pikachu,Semi-rare
+Raichu,Semi-rare
+Sandshrew,Common
+Sandslash,Semi-rare
 Nidoran♀,Common
-Nidoran♂,Common
 Nidorina,Common
+Nidoqueen,Semi-rare
+Nidoran♂,Common
 Nidorino,Semi-rare
+Nidoking,Semi-rare
+Clefairy,Common
+Clefable,Rare
+Vulpix,Common
 Ninetales,Semi-rare
+Jigglypuff,Common
+Wigglytuff,Semi-rare
+Zubat,Common
+Golbat,Semi-rare
 Oddish,Common
-Omanyte,Semi-rare
-Omastar,Semi-rare
-Onix,Common
+Gloom,Common
+Vileplume,Semi-rare
 Paras,Common
 Parasect,Semi-rare
+Venonat,Common
+Venomoth,Semi-rare
+Diglett,Common
+Dugtrio,Semi-rare
+Meowth,Common
 Persian,Semi-rare
-Pidgeot,Semi-rare
-Pidgeotto,Common
-Pidgey,Very Common
-Pikachu,Semi-rare
-Pinsir,Semi-rare
+Psyduck,Common
+Golduck,Semi-rare
+Mankey,Common
+Primeape,Semi-rare
+Growlithe,Common
+Arcanine,Very Rare
 Poliwag,Common
 Poliwhirl,Semi-rare
 Poliwrath,Semi-rare
-Ponyta,Common
-Porygon,Rare
-Primeape,Semi-rare
-Psyduck,Common
-Raichu,Semi-rare
-Rapidash,Semi-rare
-Raticate,Common
-Rattata,Very Common
-Rhydon,Semi-rare
-Rhyhorn,Common
-Sandshrew,Common
-Sandslash,Semi-rare
-Scyther,Semi-rare
-Seadra,Semi-rare
-Seaking,Common
-Seel,Common
-Shellder,Common
-Slowbro,Semi-rare
-Slowpoke,Common
-Snorlax,Very Rare
-Spearow,Common
-Squirtle,Semi-rare
-Starmie,Semi-rare
-Staryu,Common
-Tangela,Semi-rare
-Tauros,Common
+Abra,Semi-rare
+Kadabra,Semi-rare
+Alakazam,Semi-rare
+Machop,Common
+Machoke,Semi-rare
+Machamp,Rare
+Bellsprout,Common
+Weepinbell,Common
+Victreebel,Semi-rare
 Tentacool,Common
 Tentacruel,Semi-rare
-Vaporeon,Semi-rare
-Venomoth,Semi-rare
-Venonat,Common
-Venusaur,Very Rare
-Victreebel,Semi-rare
-Vileplume,Semi-rare
+Geodude,Common
+Graveler,Semi-rare
+Golem,Very Rare
+Ponyta,Common
+Rapidash,Semi-rare
+Slowpoke,Common
+Slowbro,Semi-rare
+Magnemite,Common
+Magneton,Semi-rare
+Farfetch'd,Semi-rare
+Doduo,Common
+Dodrio,Semi-rare
+Seel,Common
+Dewgong,Semi-rare
+Grimer,Common
+Muk,Semi-rare
+Shellder,Common
+Cloyster,Semi-rare
+Gastly,Semi-rare
+Haunter,Semi-rare
+Gengar,Semi-rare
+Onix,Common
+Drowzee,Semi-rare
+Hypno,Semi-rare
+Krabby,Common
+Kingler,Semi-rare
 Voltorb,Common
-Vulpix,Common
-Wartortle,Rare
-Weedle,Very Common
-Weepinbell,Common
+Electrode,Semi-rare
+Exeggcute,Common
+Exeggutor,Semi-rare
+Cubone,Common
+Marowak,Semi-rare
+Hitmonlee,Semi-rare
+Hitmonchan,Semi-rare
+Lickitung,Semi-rare
+Koffing,Common
 Weezing,Semi-rare
-Wigglytuff,Semi-rare
+Rhyhorn,Common
+Rhydon,Semi-rare
+Chansey,Semi-rare
+Tangela,Semi-rare
+Kangaskhan,Very Rare
+Horsea,Common
+Seadra,Semi-rare
+Goldeen,Common
+Seaking,Common
+Staryu,Common
+Starmie,Semi-rare
+Mr. Mime,Semi-rare
+Scyther,Semi-rare
+Jynx,Semi-rare
+Electabuzz,Semi-rare
+Magmar,Semi-rare
+Pinsir,Semi-rare
+Tauros,Common
+Magikarp,Very Common
+Gyarados,Rare
+Lapras,Semi-rare
+Ditto,Semi-rare
+Eevee,Semi-rare
+Vaporeon,Semi-rare
+Jolteon,Semi-rare
+Flareon,Semi-rare
+Porygon,Rare
+Omanyte,Semi-rare
+Omastar,Semi-rare
+Kabuto,Semi-rare
+Kabutops,Semi-rare
+Aerodactyl,Very Rare
+Snorlax,Very Rare
+Articuno,Very Rare
 Zapdos,Very Rare
-Zubat,Common
+Moltres,Very Rare
+Dratini,Semi-rare
+Dragonair,Rare
+Dragonite,Very Rare
+Mewtwo,Very Rare
+Mew,Very Rare

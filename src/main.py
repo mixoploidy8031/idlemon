@@ -38,7 +38,6 @@ gif_directory = config["gif_directory"]
 
 # Extract internal defaults
 shiny_count_file = config["shiny_count_file"]
-pokemon_data_file = config["pokemon_data_file"]
 encounter_delay = config["encounter_delay"]
 rarity_weights = config["rarity_weights"]
 shiny_rate = config["shiny_rate"]
@@ -46,7 +45,8 @@ mute_audio = config["mute_audio"]
 
 # Validate required files
 check_file_exists(shiny_count_file)
-check_file_exists(pokemon_data_file)
+for gen_file in config["pokemon_data_files"].values():
+    check_file_exists(gen_file)
 
 # Initialize global variables
 current_encounter = None
@@ -111,29 +111,40 @@ def initialize_shiny_count():
 # Handle shiny Pokémon encounter
 def handle_shiny_encounter(pokemon_name, pokemon_rarity):
     global shiny_found, timer_running
-    shiny_found = True
-    info_label.config(
-        text=f"{pokemon_name} - {pokemon_rarity} (Shiny!)",
-        fg="gold"
-    )
-    print(Fore.YELLOW + f"Congrats!!! You found a shiny {pokemon_name} after {total_encounters} encounters!" + Style.RESET_ALL)
-    
-    # Play shiny encounter sound if not muted
-    if not mute_audio:
-        shiny_sound_path = PROJECT_ROOT / "assets" / "sounds" / "shiny_sound1.wav"
-        if os.path.exists(shiny_sound_path):
-            try:
-                sound = pygame.mixer.Sound(shiny_sound_path)
-                sound.play()
-            except pygame.error as e:
-                logger.log_error(f"Error playing shiny sound: {e}")
-        else:
-            logger.log_error(f"Shiny sound file not found: {shiny_sound_path}")
-    
-    update_shiny_count()
-    logger.log_shiny(pokemon_name, pokemon_rarity)
-    continue_button.place(relx=0.5, rely=0.5, anchor="center")
-    timer_running = False
+    try:
+        shiny_found = True
+        info_label.config(
+            text=f"{pokemon_name} - {pokemon_rarity} (Shiny!)",
+            fg="gold"
+        )
+        print(Fore.YELLOW + f"Congrats!!! You found a shiny {pokemon_name} after {total_encounters} encounters!" + Style.RESET_ALL)
+        
+        # Play shiny encounter sound if not muted
+        if not mute_audio:
+            shiny_sound_path = PROJECT_ROOT / "assets" / "sounds" / "shiny_sound1.wav"
+            if os.path.exists(shiny_sound_path):
+                try:
+                    sound = pygame.mixer.Sound(shiny_sound_path)
+                    sound.play()
+                except pygame.error as e:
+                    logger.log_error(f"Error playing shiny sound: {e}")
+            else:
+                logger.log_error(f"Shiny sound file not found: {shiny_sound_path}")
+        
+        update_shiny_count()
+        # Try to log the shiny, but continue even if it fails
+        try:
+            logger.log_shiny(pokemon_name, pokemon_rarity)
+        except Exception as e:
+            logger.log_error(f"Error logging shiny: {str(e)}")
+            
+        continue_button.place(relx=0.5, rely=0.5, anchor="center")
+        timer_running = False
+    except Exception as e:
+        logger.log_error(f"Error in handle_shiny_encounter: {str(e)}")
+        # Ensure the continue button appears even if there's an error
+        continue_button.place(relx=0.5, rely=0.5, anchor="center")
+        timer_running = False
 
 # Load Pokémon data
 def initialize_pokemon_data():
@@ -160,71 +171,95 @@ def display_pokemon_gif(pokemon_name, is_shiny=False):
     
     # Get the new gif path using the correct subdirectory
     gif_subdir = "shiny" if is_shiny else "normal"
-    new_gif_path = PROJECT_ROOT / "assets" / "gifs" / gif_subdir / f"{pokemon_name}.gif"
     
-    # Set different animation speeds for normal and shiny Pokémon
-    NORMAL_FRAME_DELAY = 50   # Normal Pokémon: 50ms per frame
-    SHINY_FRAME_DELAY = 100   # Shiny Pokémon: 100ms per frame
-    FRAME_DELAY = SHINY_FRAME_DELAY if is_shiny else NORMAL_FRAME_DELAY
+    # Try each generation's directory until we find the GIF
+    for gen in range(1, 6):
+        new_gif_path = PROJECT_ROOT / "assets" / "gifs" / f"gen{gen}" / gif_subdir / f"{pokemon_name}.gif"
+        if new_gif_path.exists():
+            break
+    else:
+        print(f"GIF file not found for {pokemon_name} in any generation directory")
+        return
+    
+    # Set animation speed to 100ms per frame for all Pokémon
+    FRAME_DELAY = 67
 
-    # Stop any existing animation
-    if hasattr(display_pokemon_gif, 'after_id'):
+    # Stop any existing animation and clear the canvas
+    if hasattr(display_pokemon_gif, 'after_id') and display_pokemon_gif.after_id:
         root.after_cancel(display_pokemon_gif.after_id)
         display_pokemon_gif.after_id = None
+    canvas.delete("pokemon_gif")  # Clear any existing Pokémon image
 
-    # Load new frames if it's a different GIF file
-    if not hasattr(display_pokemon_gif, 'current_gif_path') or new_gif_path != display_pokemon_gif.current_gif_path:
-        try:
-            image = Image.open(new_gif_path)
-            frames = []  # Store frames in the global variable
-            
-            # Extract frames for animated GIFs
-            for frame in range(0, image.n_frames):
-                image.seek(frame)
-                frames.append(ImageTk.PhotoImage(image.copy()))
+    # Clear existing frames to prevent memory leaks
+    if hasattr(display_pokemon_gif, 'current_frames'):
+        display_pokemon_gif.current_frames = None
 
-            display_pokemon_gif.current_gif_path = new_gif_path
+    # Create a new list for the new frames
+    try:
+        image = Image.open(new_gif_path)
+        new_frames = []
+        
+        # Extract frames for animated GIFs
+        for frame in range(0, image.n_frames):
+            image.seek(frame)
+            # Convert to RGBA to ensure consistent format
+            frame_image = image.convert('RGBA')
+            new_frames.append(ImageTk.PhotoImage(frame_image))
 
-        except FileNotFoundError:
-            print(f"GIF file not found: {new_gif_path}")
-            return
-        except Image.UnidentifiedImageError:
-            print(f"Invalid image format for {new_gif_path}")
-            return
-        except Exception as e:
-            print(f"Unexpected error loading {pokemon_name}: {e}")
-            return
+        image.close()  # Properly close the image file
+        
+        # Store the new frames
+        display_pokemon_gif.current_frames = new_frames
+        display_pokemon_gif.current_gif_path = new_gif_path
+
+    except FileNotFoundError:
+        print(f"GIF file not found: {new_gif_path}")
+        return
+    except Image.UnidentifiedImageError:
+        print(f"Invalid image format for {new_gif_path}")
+        return
+    except Exception as e:
+        print(f"Unexpected error loading {pokemon_name}: {e}")
+        return
 
     # Define animation function
     def animate(frame_index=0):
-        if not frames:  # Safety check
+        # If we've switched to a different Pokémon, stop this animation
+        if not hasattr(display_pokemon_gif, 'current_frames') or display_pokemon_gif.current_gif_path != new_gif_path:
             return
-        
-        # Clear only Pokémon GIF
-        canvas.delete("pokemon_gif")
-        
-        # Calculate the center of the canvas
-        canvas_width = canvas.winfo_width()
-        canvas_height = canvas.winfo_height()
-        center_x = canvas_width // 2
-        center_y = (canvas_height * 5) // 6
-        
-        try:
-            # Add bounds checking
-            current_frame = frame_index % len(frames)
-            # Add the current frame of the Pokémon GIF to the canvas
-            canvas.create_image(center_x, center_y, image=frames[current_frame], tag="pokemon_gif")
             
-            # Schedule next frame with appropriate delay
-            display_pokemon_gif.after_id = root.after(FRAME_DELAY, animate, (frame_index + 1) % len(frames))
-        except (IndexError, ZeroDivisionError) as e:
-            print(f"Animation error: frame_index={frame_index}, frames length={len(frames)}")
+        try:
+            current_frames = display_pokemon_gif.current_frames
+            if not current_frames:  # Safety check
+                return
+                
+            # Calculate the center of the canvas
+            canvas_width = canvas.winfo_width()
+            canvas_height = canvas.winfo_height()
+            center_x = canvas_width // 2
+            center_y = (canvas_height * 5) // 6
+            
+            # Clear previous frame and draw new one
+            canvas.delete("pokemon_gif")
+            current_frame = frame_index % len(current_frames)
+            canvas.create_image(center_x, center_y, image=current_frames[current_frame], tag="pokemon_gif")
+            
+            # Schedule next frame only if this is still the current animation
+            if display_pokemon_gif.current_gif_path == new_gif_path:
+                next_frame = (frame_index + 1) % len(current_frames)
+                display_pokemon_gif.after_id = root.after(
+                    FRAME_DELAY,
+                    lambda: animate(next_frame)
+                )
+        except Exception as e:
+            print(f"Animation error: {e}")
             return
     
     # Start the animation
-    animate()
+    if hasattr(display_pokemon_gif, 'current_frames') and display_pokemon_gif.current_frames:
+        animate(0)
     
-    # Always update current encounter regardless of whether we loaded a new GIF
+    # Update current encounter
     current_encounter = pokemon_name
 
 # Update the timer label
@@ -337,7 +372,7 @@ canvas.pack(fill="both", expand=False)
 canvas.create_image(0, 0, image=background_image, anchor="nw")
 
 # Create labels
-info_label, info_bg = create_label_with_background(canvas, "Walking through the Kanto region...", 10, 10, 200, 20)
+info_label, info_bg = create_label_with_background(canvas, "Walking through the Pokemon world...", 10, 10, 200, 20)
 encounter_label, encounter_bg = create_label_with_background(canvas, "Encounters: 0", 10, 40, 200, 20)
 shiny_label, shiny_bg = create_label_with_background(canvas, "Shiny Pokémon Found: 0", 10, 70, 200, 20)
 stats_label, stats_bg = create_label_with_background(canvas, "Time Elapsed: 0 seconds", 10, 100, 200, 20)

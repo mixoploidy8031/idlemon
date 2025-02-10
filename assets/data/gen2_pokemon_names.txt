@@ -1,0 +1,100 @@
+Chikorita,Rare
+Bayleef,Semi-rare
+Meganium,Very Rare
+Cyndaquil,Rare
+Quilava,Semi-rare
+Typhlosion,Very Rare
+Totodile,Rare
+Croconaw,Semi-rare
+Feraligatr,Very Rare
+Sentret,Very Common
+Furret,Common
+Hoothoot,Common
+Noctowl,Semi-rare
+Ledyba,Very Common
+Ledian,Common
+Spinarak,Very Common
+Ariados,Semi-rare
+Crobat,Very Rare
+Chinchou,Common
+Lanturn,Semi-rare
+Pichu,Rare
+Cleffa,Rare
+Igglybuff,Rare
+Togepi,Semi-rare
+Togetic,Rare
+Natu,Common
+Xatu,Rare
+Mareep,Very Common
+Flaaffy,Common
+Ampharos,Rare
+Bellossom,Rare
+Marill,Common
+Azumarill,Semi-rare
+Sudowoodo,Rare
+Politoed,Rare
+Hoppip,Very Common
+Skiploom,Common
+Jumpluff,Common
+Aipom,Common
+Sunkern,Very Common
+Sunflora,Common
+Yanma,Common
+Wooper,Very Common
+Quagsire,Common
+Espeon,Rare
+Umbreon,Rare
+Murkrow,Common
+Slowking,Rare
+Misdreavus,Semi-rare
+Unown,Very Rare
+Wobbuffet,Rare
+Girafarig,Rare
+Pineco,Common
+Forretress,Semi-rare
+Dunsparce,Rare
+Gligar,Semi-rare
+Steelix,Rare
+Snubbull,Common
+Granbull,Rare
+Qwilfish,Common
+Scizor,Rare
+Shuckle,Rare
+Heracross,Rare
+Sneasel,Common
+Teddiursa,Very Common
+Ursaring,Rare
+Slugma,Common
+Magcargo,Common
+Swinub,Common
+Piloswine,Rare
+Corsola,Common
+Remoraid,Common
+Octillery,Rare
+Delibird,Rare
+Mantine,Rare
+Skarmory,Rare
+Houndour,Common
+Houndoom,Rare
+Kingdra,Rare
+Phanpy,Very Common
+Donphan,Rare
+Porygon2,Rare
+Stantler,Rare
+Smeargle,Rare
+Tyrogue,Very Common
+Hitmontop,Rare
+Smoochum,Rare
+Elekid,Rare
+Magby,Rare
+Miltank,Rare
+Blissey,Rare
+Raikou,Very Rare
+Entei,Very Rare
+Suicune,Very Rare
+Larvitar,Rare
+Pupitar,Rare
+Tyranitar,Very Rare
+Lugia,Very Rare
+Ho-Oh,Very Rare
+Celebi,Very Rare

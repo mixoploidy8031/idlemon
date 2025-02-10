@@ -1,0 +1,135 @@
+Treecko,Rare
+Grovyle,Semi-rare
+Sceptile,Very Rare
+Torchic,Rare
+Combusken,Semi-rare
+Blaziken,Very Rare
+Mudkip,Rare
+Marshtomp,Semi-rare
+Swampert,Very Rare
+Poochyena,Very Common
+Mightyena,Common
+Zigzagoon,Very Common
+Linoone,Common
+Wurmple,Very Common
+Silcoon,Common
+Beautifly,Rare
+Cascoon,Common
+Dustox,Rare
+Lotad,Very Common
+Lombre,Common
+Ludicolo,Rare
+Seedot,Very Common
+Nuzleaf,Common
+Shiftry,Rare
+Taillow,Very Common
+Swellow,Common
+Wingull,Very Common
+Pelipper,Common
+Ralts,Very Common
+Kirlia,Common
+Gardevoir,Rare
+Surskit,Very Common
+Masquerain,Rare
+Shroomish,Very Common
+Breloom,Rare
+Slakoth,Very Common
+Vigoroth,Common
+Slaking,Rare
+Nincada,Very Common
+Ninjask,Rare
+Shedinja,Rare
+Whismur,Very Common
+Loudred,Common
+Exploud,Rare
+Makuhita,Very Common
+Hariyama,Rare
+Azurill,Rare
+Nosepass,Very Common
+Skitty,Very Common
+Delcatty,Rare
+Sableye,Rare
+Mawile,Rare
+Aron,Very Common
+Lairon,Common
+Aggron,Rare
+Meditite,Very Common
+Medicham,Rare
+Electrike,Very Common
+Manectric,Rare
+Plusle,Very Common
+Minun,Very Common
+Volbeat,Common
+Illumise,Common
+Roselia,Common
+Gulpin,Very Common
+Swalot,Rare
+Carvanha,Very Common
+Sharpedo,Rare
+Wailmer,Very Common
+Wailord,Rare
+Numel,Very Common
+Camerupt,Rare
+Torkoal,Rare
+Spoink,Very Common
+Grumpig,Rare
+Spinda,Common
+Trapinch,Very Common
+Vibrava,Common
+Flygon,Rare
+Cacnea,Very Common
+Cacturne,Rare
+Swablu,Very Common
+Altaria,Rare
+Zangoose,Rare
+Seviper,Rare
+Lunatone,Rare
+Solrock,Rare
+Barboach,Very Common
+Whiscash,Rare
+Corphish,Very Common
+Crawdaunt,Rare
+Baltoy,Very Common
+Claydol,Rare
+Lileep,Very Common
+Cradily,Rare
+Anorith,Very Common
+Armaldo,Rare
+Feebas,Very Common
+Milotic,Rare
+Castform,Rare
+Kecleon,Common
+Shuppet,Very Common
+Banette,Rare
+Duskull,Very Common
+Dusclops,Rare
+Tropius,Rare
+Chimecho,Rare
+Absol,Rare
+Wynaut,Very Common
+Snorunt,Very Common
+Glalie,Rare
+Spheal,Very Common
+Sealeo,Common
+Walrein,Rare
+Clamperl,Very Common
+Huntail,Rare
+Gorebyss,Rare
+Relicanth,Common
+Luvdisc,Common
+Bagon,Very Common
+Shelgon,Common
+Salamence,Rare
+Beldum,Very Common
+Metang,Common
+Metagross,Rare
+Registeel,Very Rare
+Regirock,Very Rare
+Regice,Very Rare
+Latias,Very Rare
+Latios,Very Rare
+Kyogre,Very Rare
+Groudon,Very Rare
+Rayquaza,Very Rare
+Jirachi,Very Rare
+Deoxys,Very Rare

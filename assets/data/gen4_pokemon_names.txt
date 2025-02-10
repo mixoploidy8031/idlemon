@@ -1,0 +1,107 @@
+Turtwig,Rare
+Grotle,Semi-rare
+Torterra,Very Rare
+Chimchar,Rare
+Monferno,Semi-rare
+Infernape,Very Rare
+Piplup,Rare
+Prinplup,Semi-rare
+Empoleon,Very Rare
+Starly,Very Common
+Staravia,Common
+Staraptor,Rare
+Bidoof,Very Common
+Bibarel,Common
+Kricketot,Very Common
+Kricketune,Rare
+Shinx,Very Common
+Luxio,Common
+Luxray,Rare
+Budew,Very Common
+Roserade,Rare
+Cranidos,Rare
+Rampardos,Very Rare
+Shieldon,Very Common
+Bastiodon,Rare
+Burmy,Very Common
+Wormadam,Common
+Mothim,Rare
+Combee,Very Common
+Vespiquen,Rare
+Pachirisu,Common
+Buizel,Very Common
+Floatzel,Rare
+Cherubi,Very Common
+Cherrim,Common
+Shellos,Very Common
+Gastrodon,Rare
+Ambipom,Common
+Drifloon,Very Common
+Drifblim,Rare
+Buneary,Very Common
+Lopunny,Rare
+Mismagius,Rare
+Honchkrow,Rare
+Glameow,Very Common
+Purugly,Common
+Chingling,Very Common
+Stunky,Very Common
+Skuntank,Rare
+Bronzor,Very Common
+Bronzong,Rare
+Bonsly,Very Common
+Mime Jr.,Very Common
+Happiny,Very Common
+Chatot,Rare
+Spiritomb,Rare
+Gible,Very Common
+Gabite,Common
+Garchomp,Rare
+Munchlax,Very Common
+Riolu,Very Common
+Lucario,Rare
+Hippopotas,Very Common
+Hippowdon,Rare
+Skorupi,Very Common
+Drapion,Rare
+Croagunk,Very Common
+Toxicroak,Rare
+Carnivine,Common
+Finneon,Very Common
+Lumineon,Common
+Mantyke,Very Common
+Snover,Very Common
+Abomasnow,Rare
+Weavile,Rare
+Magnezone,Rare
+Lickilicky,Rare
+Rhyperior,Rare
+Tangrowth,Rare
+Electivire,Rare
+Magmortar,Rare
+Togekiss,Rare
+Yanmega,Rare
+Leafeon,Rare
+Glaceon,Rare
+Gliscor,Rare
+Mamoswine,Rare
+Porygon-Z,Rare
+Gallade,Rare
+Probopass,Rare
+Dusknoir,Rare
+Froslass,Rare
+Rotom,Rare
+Uxie,Very Rare
+Mesprit,Very Rare
+Azelf,Very Rare
+Dialga,Very Rare
+Palkia,Very Rare
+Heatran,Very Rare
+Regigigas,Very Rare
+Giratina,Very Rare
+Cresselia,Very Rare
+Phione,Rare
+Manaphy,Rare
+Darkrai,Very Rare
+Shaymin,Very Rare
+Arceus,Very Rare

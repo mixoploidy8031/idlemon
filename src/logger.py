@@ -43,10 +43,15 @@ class LogManager:
         else:
             self.shiny_encounters[pokemon_name] = {'rarity': rarity, 'count': 1}
         
-        # Write updated encounters to file
-        with open(self.shiny_log_path, 'w') as f:
-            for name, data in sorted(self.shiny_encounters.items()):
-                f.write(f"{name} | {data['rarity']} | {data['count']}\n")
+        try:
+            # Write updated encounters to file with UTF-8 encoding
+            with open(self.shiny_log_path, 'w', encoding='utf-8') as f:
+                for name, data in sorted(self.shiny_encounters.items()):
+                    f.write(f"{name} | {data['rarity']} | {data['count']}\n")
+        except Exception as e:
+            self.error_logger.error(f"Error writing to shiny log: {str(e)}")
+            # Don't let logging errors prevent the game from continuing
+            return True  # Return True to indicate shiny was found even if logging failed
 
 # Create global logger instance
 logger = LogManager() 
