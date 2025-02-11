@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=IdleMon
+Comment=Pokemon Shiny Hunting Simulator
+Exec=/usr/local/games/idlemon/IdleMon
+Icon=/usr/local/games/idlemon/assets/images/icon.ico
+Terminal=false
+Categories=Game;
+Keywords=pokemon;game;shiny; 

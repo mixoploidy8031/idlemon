@@ -51,6 +51,44 @@ Option 2: Run executable
 2. Extract the zip file
 3. Run IdleMon.exe
 
+## Installation
+
+### Windows
+1. Download the latest release
+2. Extract the zip file
+3. Run IdleMon.exe
+
+### Linux
+1. Download the latest release
+2. Extract the archive
+3. Open terminal in the extracted directory
+4. Make the install script executable:
+   ```bash
+   chmod +x install_linux.sh
+   ```
+5. Run the installation script with sudo:
+   ```bash
+   sudo ./install_linux.sh
+   ```
+6. The game will be installed to `/usr/local/games/idlemon` and a desktop entry will be created
+7. You can now launch IdleMon from your applications menu or run it from terminal with `IdleMon`
+
+To build from source on Linux:
+1. Install required packages:
+   ```bash
+   sudo apt-get install python3-tk python3-pip
+   pip3 install pillow pygame colorama pyinstaller
+   ```
+2. Clone the repository
+3. Build the executable:
+   ```bash
+   pyinstaller main_linux.spec
+   ```
+4. Run the installation script:
+   ```bash
+   sudo ./install_linux.sh
+   ```
+
 ---
 
 ## Configuration
