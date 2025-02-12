@@ -5,7 +5,10 @@ from pathlib import Path
 from config_loader import get_base_path
 
 class LogManager:
+    # Manages logging functionality for errors and shiny encounters
     def __init__(self):
+        # Initialize the log manager
+        # Sets up error logging and shiny encounter tracking
         base_path = get_base_path()
         # Use data path for writing logs
         self.logs_dir = base_path['data'] / "logs"
@@ -23,6 +26,9 @@ class LogManager:
         self.shiny_encounters = self._load_shiny_encounters()
 
     def _load_shiny_encounters(self):
+        # Load existing shiny encounter data from file
+        # Returns:
+        #     dict: Mapping of Pokemon names to their encounter data
         encounters = {}
         if os.path.exists(self.shiny_log_path):
             with open(self.shiny_log_path, 'r') as f:
@@ -35,9 +41,18 @@ class LogManager:
         return encounters
 
     def log_error(self, message):
+        # Log an error message
+        # Args:
+        #     message (str): Error message to log
         self.error_logger.error(message)
 
     def log_shiny(self, pokemon_name, rarity):
+        # Log a shiny Pokemon encounter
+        # Args:
+        #     pokemon_name (str): Name of the shiny Pokemon
+        #     rarity (str): Rarity level of the Pokemon
+        # Returns:
+        #     bool: True if logging was successful, False otherwise
         if pokemon_name in self.shiny_encounters:
             self.shiny_encounters[pokemon_name]['count'] += 1
         else:

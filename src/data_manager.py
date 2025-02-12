@@ -8,7 +8,11 @@ config = load_config()
 shiny_count_file = config["shiny_count_file"]
 
 class DataManager:
+    # Manages data loading, saving, and validation for the application
     def __init__(self, config):
+        # Initialize the data manager
+        # Args:
+        #     config (dict): Configuration dictionary containing file paths and settings
         base_path = get_base_path()
         # Use data path for files that need to be written to
         self.shiny_count_file = base_path['data'] / "logs/shiny_count.bin"
@@ -20,6 +24,9 @@ class DataManager:
         self.pokemon_data_cache = None
 
     def load_shiny_count(self):
+        # Load the total number of shiny Pokemon encountered
+        # Returns:
+        #     int: Number of shiny Pokemon found, 0 if file doesn't exist or is corrupted
         if os.path.exists(self.shiny_count_file):
             with open(self.shiny_count_file, "r") as file:
                 try:
@@ -36,12 +43,20 @@ class DataManager:
         return 0
 
     def save_shiny_count(self, count):
+        # Save the total number of shiny Pokemon encountered
+        # Args:
+        #     count (int): Number of shiny Pokemon to save
         encoded = base64.b64encode(str(count).encode("utf-8")).decode("utf-8")
         with open(self.shiny_count_file, "w") as file:
             file.write(encoded)
 
     def validate_pokemon_data(self, gen, file_path):
-        """Validate Pokemon data file against stored hash."""
+        # Validate Pokemon data file against stored hash
+        # Args:
+        #     gen (str): Generation identifier (e.g., 'gen1')
+        #     file_path (str): Path to the Pokemon data file
+        # Returns:
+        #     bool: True if validation passes, False otherwise
         import hashlib
         
         if not os.path.exists(file_path):
@@ -63,7 +78,10 @@ class DataManager:
         return True
 
     def load_pokemon_data(self):
-        """Load Pokemon data from all generation files into one combined pool."""
+        # Load Pokemon data from all generation files into one combined pool
+        # Returns:
+        #     dict: Combined Pokemon data mapping names to rarities
+        
         # Return cached data if available
         if self.pokemon_data_cache is not None:
             return self.pokemon_data_cache
