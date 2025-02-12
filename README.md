@@ -32,7 +32,7 @@ sudo apt-get install python3-pip python3-venv python3-tk python3-pygame python3-
 
 2. Clone and enter the repository:
 ```bash
-git clone https://github.com/mixoploidy8031/idlemon.git
+git clone -b linux https://github.com/mixoploidy8031/idlemon.git
 cd idlemon
 ```
 
