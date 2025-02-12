@@ -107,6 +107,7 @@ For installed version, edit `/usr/local/games/idlemon/config.json` (may require 
     "encounter_delay": 2.5,        # Time between encounters in seconds
     "shiny_rate": 2000,           # 1 in X chance of finding a shiny
     "mute_audio": false,          # Set to true to disable all sounds
+    "background_image": "assets/images/default_background.jpg",  # Path to background image
     "rarity_weights": {           # Spawn rates for different rarities
         "Very Common": 45,        # 45% chance
         "Common": 30,            # 30% chance
@@ -116,6 +117,13 @@ For installed version, edit `/usr/local/games/idlemon/config.json` (may require 
     }
 }
 ```
+
+### Background Image
+You can use a custom background image by setting the `background_image` path in `config.json`:
+- Use a relative path from the game directory: `"background_image": "assets/images/my_background.jpg"`
+- Or use an absolute path: `"background_image": "/home/user/pictures/my_background.jpg"`
+- Supported formats: JPG, PNG
+- If the image is not found, it will fall back to the default background
 
 Note: After changing the config file in installed mode, you may need to fix permissions:
 ```bash

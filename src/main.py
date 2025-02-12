@@ -73,19 +73,35 @@ if os.path.isabs(background_image_path):
     background_path = Path(background_image_path)
 else:
     # If it's a relative path, use it relative to project root
-    background_path = PROJECT_ROOT / background_image_path
+    background_path = PROJECT_ROOT['runtime'] / background_image_path
 
 # Fallback to default background if specified path doesn't exist
 if not check_file_exists(background_path):
     print(f"Warning: Could not find background image at {background_path}")
     print("Falling back to default background...")
-    background_path = PROJECT_ROOT / "assets" / "images" / "default_background.jpg"
+    background_path = PROJECT_ROOT['runtime'] / "assets" / "images" / "default_background.jpg"
     if not check_file_exists(background_path):
         print(f"Error: Could not find default background image at {background_path}")
         root.destroy()
         sys.exit(1)
 
-background_image = tk.PhotoImage(file=str(background_path))
+try:
+    # Convert image to PhotoImage format
+    pil_image = Image.open(background_path)
+    background_image = ImageTk.PhotoImage(pil_image)
+    pil_image.close()
+except Exception as e:
+    print(f"Error loading background image: {e}")
+    print("Falling back to default background...")
+    try:
+        default_path = PROJECT_ROOT['runtime'] / "assets" / "images" / "default_background.jpg"
+        pil_image = Image.open(default_path)
+        background_image = ImageTk.PhotoImage(pil_image)
+        pil_image.close()
+    except Exception as e:
+        print(f"Error loading default background: {e}")
+        root.destroy()
+        sys.exit(1)
 
 # Get dimensions of the background image
 background_width = background_image.width()

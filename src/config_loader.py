@@ -142,6 +142,19 @@ class ConfigManager:
                 for gen, path in config["pokemon_data_files"].items()
             }
         
+        # Handle background image path
+        if "background_image" in config:
+            if not os.path.isabs(config["background_image"]):
+                # Keep background_image as relative path, it will be resolved at runtime
+                # relative to the appropriate base path (runtime or data)
+                pass
+            else:
+                # Verify the absolute path exists
+                if not os.path.exists(config["background_image"]):
+                    print(f"Warning: Custom background image not found at {config['background_image']}")
+                    print("Will use default background.")
+                    config["background_image"] = "assets/images/default_background.jpg"
+        
         # Validate all generation files
         for file_path in config["pokemon_data_files"].values():
             self.validate_pokemon_data(file_path)
