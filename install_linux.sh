@@ -24,8 +24,16 @@ echo "Installing IdleMon..."
 # Create installation directory
 mkdir -p "$INSTALL_DIR"
 
-# Copy all files to installation directory
-cp -r ./* "$INSTALL_DIR/"
+# First, copy the executable from the dist directory
+if [ -f "dist/$EXECUTABLE" ]; then
+    cp "dist/$EXECUTABLE" "$INSTALL_DIR/"
+else
+    echo "Error: Executable not found in dist directory. Please build the project first."
+    exit 1
+fi
+
+# Copy all other files to installation directory
+cp -r assets config.json "$INSTALL_DIR/"
 
 # Create desktop entry
 cat > "$DESKTOP_FILE" << EOL
