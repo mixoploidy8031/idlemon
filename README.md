@@ -4,7 +4,8 @@ This project simulates encountering Pokémon with a chance of finding shiny Pok�
 
 ![icon](assets/images/icon_png.png)
 
----
+## For Linux
+https://github.com/mixoploidy8031/idlemon/tree/linux
 
 ## Features
 - **Encounter simulation:** Displays Pokémon with their respective rarities
