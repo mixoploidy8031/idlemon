@@ -64,17 +64,26 @@ Option 2: Run executable
 1. Download the latest release
 2. Extract the archive
 3. Open terminal in the extracted directory
-4. Make the install script executable:
+4. Make the installation scripts executable:
    ```bash
-   chmod +x install_linux.sh
+   chmod +x install_linux.sh uninstall_linux.sh
    ```
 5. Run the installation script with sudo:
    ```bash
    sudo ./install_linux.sh
    ```
-6. The game will be installed to `/usr/local/games/idlemon`
-7. A desktop entry will be created in `/usr/share/applications`
-8. You can now launch IdleMon from your applications menu or run it from terminal with `IdleMon`
+
+The installation script will:
+- Install the game to `/usr/local/games/idlemon`
+- Create a desktop entry in `/usr/share/applications`
+- Set up proper file permissions
+- Add the game to your system PATH
+- Create necessary directories for logs and data
+
+After installation, you can:
+- Launch IdleMon from your applications menu
+- Run it from terminal with `IdleMon`
+- Access your save data in `/usr/local/games/idlemon/logs`
 
 #### Option 2: Building from Source
 1. Install required packages:
@@ -110,6 +119,24 @@ Option 2: Run executable
    sudo ./install_linux.sh
    ```
 
+#### Uninstalling
+To uninstall IdleMon, you have two options:
+
+1. Using the uninstall script:
+   ```bash
+   sudo ./uninstall_linux.sh
+   ```
+
+2. Manual uninstallation:
+   ```bash
+   sudo rm -rf /usr/local/games/idlemon /usr/share/applications/idlemon.desktop /usr/local/games/IdleMon
+   sudo update-desktop-database
+   ```
+
+After uninstalling, you may want to:
+- Remove the PATH modification from `~/.profile` if you don't need it
+- Delete any remaining configuration files in your home directory
+
 #### Customizing the Installation
 - The game is installed to `/usr/local/games/idlemon` by default
 - The desktop entry is created in `/usr/share/applications/idlemon.desktop`
@@ -132,6 +159,8 @@ You can also run the game directly without installation:
    ./IdleMon
    ```
 
+Note: Running without installation will still create necessary directories and save files relative to the executable's location.
+
 #### Troubleshooting Linux Installation
 - If the game icon doesn't appear in your applications menu:
   ```bash
@@ -151,6 +180,13 @@ You can also run the game directly without installation:
   echo 'export PATH="/usr/local/games:$PATH"' >> ~/.bashrc
   source ~/.bashrc
   ```
+- If the game won't start:
+  1. Check the error log: `/usr/local/games/idlemon/logs/error.log`
+  2. Try running from terminal to see error messages
+  3. Verify all dependencies are installed:
+     ```bash
+     ldd /usr/local/games/idlemon/IdleMon
+     ```
 
 ---
 
