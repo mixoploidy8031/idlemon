@@ -26,11 +26,11 @@ PROJECT_ROOT = get_base_path()
 
 # Pre-calculated hashes for Pokemon data files
 POKEMON_DATA_HASHES = {
-    "gen1": "bb1fd5dbb801d1e8f453d39eedc85f20fb96c804613041b236581e4037645b5f",
-    "gen2": "6bac78b82268154f307cbdff766e2d71c67f48881bd296f5f1d1ac6af556b5c3",
-    "gen3": "edc5d92ae40dd6d8cc7205537d58b570fede40970ba2cfd8bb9e7ab3241d21cb",
-    "gen4": "56e5512eff1684bf4fac1d512d5ab8fd9fe49c1058260f85e3a43a57fbd8b8eb",
-    "gen5": "35f7fbd7e12604d46517389f8d1133f06e67d93b3dbe4fc6b894f26b658c0f73"
+    "gen1": "bfe76e5d3b39b5a2a4f0faf0ed3a00d3a8775f7ee336df86fd562209cc5eb1b0",
+    "gen2": "3679bef5ac839a7c288d4e1a07d79156c0ddb4b8a629ec32be53d0b12a8b5919",
+    "gen3": "9c3a4d46e5ed8305a741af4dd538adb01b8dfced1f890f3c1b10063102f5d3d7",
+    "gen4": "249b177d1110613155909c8dfdf9237b7d153fee79471f414dc1afdfda4604d1",
+    "gen5": "1332dce2c35000475e1d3d3478dc51eb0fdad0946bcf4572f9bf8e11d4d63ab1"
 }
 
 DEFAULT_CONFIG = {
@@ -79,8 +79,14 @@ class ConfigManager:
             print(f"Error: {file_path} not found. Please ensure all Pokemon data files are present.")
             sys.exit(1)
             
+        # Read file in binary mode and normalize line endings to LF
         with open(file_path, "rb") as file:
-            file_hash = hashlib.sha256(file.read()).hexdigest()
+            content = file.read()
+            # Convert all line endings to LF
+            content = content.replace(b'\r\n', b'\n').replace(b'\r', b'\n')
+            # Normalize whitespace while preserving line endings
+            content = b'\n'.join(line.strip() for line in content.split(b'\n'))
+            file_hash = hashlib.sha256(content).hexdigest()
             
         if file_hash != POKEMON_DATA_HASHES[gen]:
             print(f"Warning: {file_path} may have been modified. Hash verification failed.")

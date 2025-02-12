@@ -48,8 +48,14 @@ class DataManager:
             logger.log_error(f"Error: {file_path} not found.")
             return False
             
+        # Read file in binary mode and normalize line endings to LF
         with open(file_path, "rb") as file:
-            file_hash = hashlib.sha256(file.read()).hexdigest()
+            content = file.read()
+            # Convert all line endings to LF
+            content = content.replace(b'\r\n', b'\n').replace(b'\r', b'\n')
+            # Normalize whitespace while preserving line endings
+            content = b'\n'.join(line.strip() for line in content.split(b'\n'))
+            file_hash = hashlib.sha256(content).hexdigest()
             
         if file_hash != POKEMON_DATA_HASHES.get(gen, ""):
             logger.log_error(f"Warning: {file_path} may have been modified. Hash verification failed.")

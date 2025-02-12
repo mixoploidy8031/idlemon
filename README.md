@@ -59,6 +59,8 @@ Option 2: Run executable
 3. Run IdleMon.exe
 
 ### Linux
+
+#### Option 1: Using the Release Package
 1. Download the latest release
 2. Extract the archive
 3. Open terminal in the extracted directory
@@ -70,24 +72,85 @@ Option 2: Run executable
    ```bash
    sudo ./install_linux.sh
    ```
-6. The game will be installed to `/usr/local/games/idlemon` and a desktop entry will be created
-7. You can now launch IdleMon from your applications menu or run it from terminal with `IdleMon`
+6. The game will be installed to `/usr/local/games/idlemon`
+7. A desktop entry will be created in `/usr/share/applications`
+8. You can now launch IdleMon from your applications menu or run it from terminal with `IdleMon`
 
-To build from source on Linux:
+#### Option 2: Building from Source
 1. Install required packages:
    ```bash
-   sudo apt-get install python3-tk python3-pip
-   pip3 install pillow pygame colorama pyinstaller
+   sudo apt-get install python3-tk python3-pip git
    ```
-2. Clone the repository
-3. Build the executable:
+
+2. Clone the repository:
    ```bash
-   pyinstaller main_linux.spec
+   git clone https://github.com/yourusername/idlemon.git
+   cd idlemon
    ```
-4. Run the installation script:
+
+3. Create and activate a virtual environment:
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate
+   ```
+
+4. Install required Python packages:
+   ```bash
+   pip install -r requirements.txt
+   pip install pyinstaller
+   ```
+
+5. Build the executable:
+   ```bash
+   pyinstaller main.spec
+   ```
+
+6. Run the installation script:
    ```bash
    sudo ./install_linux.sh
    ```
+
+#### Customizing the Installation
+- The game is installed to `/usr/local/games/idlemon` by default
+- The desktop entry is created in `/usr/share/applications/idlemon.desktop`
+- You can customize the installation by:
+  1. Editing the `install_linux.sh` script before running it
+  2. Manually editing the desktop entry file:
+     ```bash
+     sudo nano /usr/share/applications/idlemon.desktop
+     ```
+  3. Creating a local desktop entry in `~/.local/share/applications/`
+
+#### Running Without Installation
+You can also run the game directly without installation:
+1. Make the executable file executable:
+   ```bash
+   chmod +x IdleMon
+   ```
+2. Run the game:
+   ```bash
+   ./IdleMon
+   ```
+
+#### Troubleshooting Linux Installation
+- If the game icon doesn't appear in your applications menu:
+  ```bash
+  # Update desktop database
+  sudo update-desktop-database
+  ```
+- If you get permission errors:
+  ```bash
+  # Fix ownership of the game directory
+  sudo chown -R $USER:$USER /usr/local/games/idlemon
+  # Fix permissions
+  sudo chmod -R 755 /usr/local/games/idlemon
+  ```
+- If you get "command not found":
+  ```bash
+  # Add the games directory to your PATH
+  echo 'export PATH="/usr/local/games:$PATH"' >> ~/.bashrc
+  source ~/.bashrc
+  ```
 
 ---
 
