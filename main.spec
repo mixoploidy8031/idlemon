@@ -24,7 +24,7 @@ added_files = [
     ('assets/gifs/gen5/shiny/*', 'assets/gifs/gen5/shiny'),
     ('assets/data/*', 'assets/data'),
     ('config.json', '.'),
-    ('logs/*', 'logs'),
+    ('logs', 'logs'),  # Include empty logs directory for development mode
 ]
 
 a = Analysis(
