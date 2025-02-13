@@ -9,52 +9,73 @@ This is the Linux version of IdleMon, an automated shiny hunting simulator. For 
 - Display resolution: 500x500 minimum
 - Audio output device (optional)
 
-### Quick Install (Recommended)
+### Quick Install (Pre-built Release)
 
-1. Download and extract the latest release, or clone the repository:
+1. Download the latest release from: https://github.com/mixoploidy8031/idlemon/releases
+2. Extract the archive:
 ```bash
-git clone -b linux https://github.com/mixoploidy8031/idlemon.git
+tar xzf idlemon-linux-vX.X.X.tar.gz
 cd idlemon
 ```
 
-2. Run the installation script:
+3. Run the installation script:
 ```bash
 sudo ./install_idlemon.sh
 ```
 
-3. Start the application:
+4. Start the application:
 - From applications menu: Search for "IdleMon"
 - From terminal: Type `IdleMon`
 
 Note: You may need to log out and log back in for the PATH changes to take effect.
 
-### Development Mode
+### Building from Source
 
-If you want to run the application directly from source or contribute to development:
+If you want to build and install from the latest source code:
 
-1. Install system dependencies:
-```bash
-sudo apt-get install python3-pip python3-venv python3-tk python3-pygame python3-pil python3-colorama
-```
-
-2. Clone and enter the repository:
+1. Clone the repository:
 ```bash
 git clone -b linux https://github.com/mixoploidy8031/idlemon.git
 cd idlemon
 ```
 
-3. Create and activate virtual environment:
+2. Create and activate virtual environment:
 ```bash
 python3 -m venv venv
 source venv/bin/activate
 ```
 
-4. Install Python dependencies:
+3. Install build dependencies:
+```bash
+pip install -r requirements.txt pyinstaller
+```
+
+4. Build the application:
+```bash
+pyinstaller main.spec
+```
+
+5. Install the built application:
+```bash
+sudo ./install_idlemon.sh
+```
+
+### Running from Source (Development)
+
+If you want to run the application directly from source without installation:
+
+1. Clone the repository (if you haven't already):
+```bash
+git clone -b linux https://github.com/mixoploidy8031/idlemon.git
+cd idlemon
+```
+
+2. Install Python dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
-5. Run the application:
+3. Run the application:
 ```bash
 python src/main.py
 ```
