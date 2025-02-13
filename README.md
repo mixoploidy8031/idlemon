@@ -30,11 +30,15 @@ https://github.com/mixoploidy8031/idlemon/tree/linux
 ## Requirements
 For building from source:
 - Python 3.8 or later
-- Required libraries: `Pillow`, `pygame`, `tkinter`, `colorama`
+- Required libraries listed in requirements.txt
 
 Install dependencies:
 ```bash
-pip install pillow pygame colorama
+# Using pip (Windows/Linux)
+pip install -r requirements.txt
+
+# Or if you have multiple Python versions
+python -m pip install -r requirements.txt
 ```
 
 ---
@@ -52,11 +56,11 @@ The application is fully portable:
 - No installation required
 - No system modifications
 
-### Building from Source
+### Building from Source (Windows)
 1. Clone the repository
 2. Install dependencies:
    ```bash
-   pip install pillow pygame colorama pyinstaller
+   python -m pip install -r requirements.txt
    ```
 3. Build the executable:
    ```bash
