@@ -1,6 +1,6 @@
 # IdleMon for Linux
 
-This is the Linux version of IdleMon, an automated shiny hunting simulator. For the Windows version, visit the main branch: https://github.com/mixoploidy8031/idlemon
+This is the Linux version of IdleMon, an automated shiny hunting simulator. For the Windows version, visit the main branch: https://github.com/zainibeats/idlemon
 
 ## Installation
 
@@ -11,7 +11,7 @@ This is the Linux version of IdleMon, an automated shiny hunting simulator. For 
 
 ### Quick Install (Pre-built Release)
 
-1. Download the latest release from: https://github.com/mixoploidy8031/idlemon/releases
+1. Download the latest release from: https://github.com/zainibeats/idlemon/releases
 2. Extract the archive:
 ```bash
 tar xzf idlemon-linux-vX.X.X.tar.gz
@@ -35,7 +35,7 @@ If you want to build and install from the latest source code:
 
 1. Clone the repository:
 ```bash
-git clone -b linux https://github.com/mixoploidy8031/idlemon.git
+git clone -b linux https://github.com/zainibeats/idlemon.git
 cd idlemon
 ```
 
@@ -66,7 +66,7 @@ If you want to run the application directly from source without installation:
 
 1. Clone the repository (if you haven't already):
 ```bash
-git clone -b linux https://github.com/mixoploidy8031/idlemon.git
+git clone -b linux https://github.com/zainibeats/idlemon.git
 cd idlemon
 ```
 
