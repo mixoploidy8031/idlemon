@@ -26,10 +26,10 @@ Pikachu,Semi-rare
 Raichu,Semi-rare
 Sandshrew,Common
 Sandslash,Semi-rare
-Nidoran♀,Common
+NidoranF,Common
 Nidorina,Common
 Nidoqueen,Semi-rare
-Nidoran♂,Common
+NidoranM,Common
 Nidorino,Semi-rare
 Nidoking,Semi-rare
 Clefairy,Common
