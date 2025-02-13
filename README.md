@@ -2,10 +2,9 @@
 
 This project simulates encountering Pokémon with a chance of finding shiny Pokémon. It features animated GIFs for Pokémon encounters, shiny tracking, encounter statistics, and customization options.
 
-![icon](assets/images/icon_png.png)
+> **Note:** Looking for the Linux version? Check out the [Linux branch](https://github.com/mixoploidy8031/idlemon/tree/linux)
 
-## For Linux
-https://github.com/mixoploidy8031/idlemon/tree/linux
+![icon](assets/images/icon_png.png)
 
 ## Features
 - **Encounter simulation:** Displays Pokémon with their respective rarities
@@ -75,8 +74,15 @@ The simulator can be customized using a `config.json` file placed in the same fo
 
 ### Example `config.json`
 ```json
+# Using absolute path:
 {
     "background_image": "C:/Users/YourName/Pictures/custom_background.png",
+    "mute_audio": false
+}
+
+# OR using relative path (relative to IdleMon.exe):
+{
+    "background_image": "assets/images/my_background.jpg",
     "mute_audio": false
 }
 ```
@@ -84,7 +90,7 @@ The simulator can be customized using a `config.json` file placed in the same fo
 ### Key Settings
 - **`background_image`:** Path to background image. Can be:
   - Absolute path (e.g., "C:/Users/YourName/Pictures/custom_background.png")
-  - Relative path from executable (e.g., "assets/images/custom_background.png")
+  - Relative path from IdleMon.exe (e.g., "assets/images/my_background.jpg")
   - Defaults to included background if not found
 - **`mute_audio`:** Set to `true` to disable all sound effects (default: `false`)
 
