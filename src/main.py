@@ -20,10 +20,18 @@ def get_base_path():
     # Determine base path for development and PyInstaller
     if getattr(sys, 'frozen', False):
         # If the application is run as a bundle (PyInstaller)
-        return Path(sys.executable).parent
+        exe_dir = Path(sys.executable).parent
+        return {
+            'runtime': Path(sys._MEIPASS),  # For reading resources
+            'data': exe_dir  # For writing data files
+        }
     else:
         # If running in development
-        return Path(__file__).parent.parent
+        dev_path = Path(__file__).parent.parent
+        return {
+            'runtime': dev_path,
+            'data': dev_path
+        }
 
 PROJECT_ROOT = get_base_path()
 
@@ -137,7 +145,7 @@ def handle_shiny_encounter(pokemon_name, pokemon_rarity):
         
         # Play shiny encounter sound if not muted
         if not mute_audio:
-            shiny_sound_path = PROJECT_ROOT / "assets" / "sounds" / "shiny_sound1.wav"
+            shiny_sound_path = PROJECT_ROOT['runtime'] / "assets" / "sounds" / "shiny_sound1.wav"
             if os.path.exists(shiny_sound_path):
                 try:
                     sound = pygame.mixer.Sound(shiny_sound_path)
@@ -190,7 +198,7 @@ def display_pokemon_gif(pokemon_name, is_shiny=False):
     
     # Try each generation's directory until we find the GIF
     for gen in range(1, 6):
-        new_gif_path = PROJECT_ROOT / "assets" / "gifs" / f"gen{gen}" / gif_subdir / f"{pokemon_name}.gif"
+        new_gif_path = PROJECT_ROOT['runtime'] / "assets" / "gifs" / f"gen{gen}" / gif_subdir / f"{pokemon_name}.gif"
         if new_gif_path.exists():
             break
     else:
@@ -299,7 +307,7 @@ def continue_hunt():
 
     # Play continue button sound if not muted
     if not mute_audio:
-        continue_sound_path = PROJECT_ROOT / "assets" / "sounds" / "continue_sound1.wav"
+        continue_sound_path = PROJECT_ROOT['runtime'] / "assets" / "sounds" / "continue_sound1.wav"
         if os.path.exists(continue_sound_path):
             try:
                 sound = pygame.mixer.Sound(continue_sound_path)
