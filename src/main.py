@@ -94,8 +94,13 @@ if not check_file_exists(background_path):
         sys.exit(1)
 
 try:
-    # Convert image to PhotoImage format
+    # Load and scale background image
     pil_image = Image.open(background_path)
+    # Scale to fit 500px height while maintaining aspect ratio
+    target_height = 500
+    scale = target_height / pil_image.height
+    target_width = int(pil_image.width * scale)
+    pil_image = pil_image.resize((target_width, target_height), Image.Resampling.LANCZOS)
     background_image = ImageTk.PhotoImage(pil_image)
     pil_image.close()
 except Exception as e:
@@ -104,6 +109,11 @@ except Exception as e:
     try:
         default_path = PROJECT_ROOT['runtime'] / "assets" / "images" / "default_background.jpg"
         pil_image = Image.open(default_path)
+        # Scale default background the same way
+        target_height = 500
+        scale = target_height / pil_image.height
+        target_width = int(pil_image.width * scale)
+        pil_image = pil_image.resize((target_width, target_height), Image.Resampling.LANCZOS)
         background_image = ImageTk.PhotoImage(pil_image)
         pil_image.close()
     except Exception as e:
@@ -111,7 +121,7 @@ except Exception as e:
         root.destroy()
         sys.exit(1)
 
-# Get dimensions of the background image
+# Get dimensions of the scaled background
 background_width = background_image.width()
 background_height = background_image.height()
 
