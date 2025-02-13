@@ -1,29 +1,36 @@
-# IdleMon - Automated Shiny Hunting Simulator
+# IdleMon for Linux
 
-A Python-based simulator for encountering Pokémon with shiny hunting mechanics, featuring animated sprites, statistics tracking, and customizable settings.
-
-![icon](assets/images/icon_png.png)
-
-## Features
-
-- Real-time Pokémon encounters with rarity-based spawning
-- Animated sprites for both normal and shiny variants
-- 1/2000 base shiny rate with visual and audio notifications
-- Statistics tracking (encounters, shinies found, time elapsed)
-- Modern UI with custom backgrounds
-- Persistent progress saving
-
-![screenshot of shiny gyrados encounter](assets/images/screenshot_gyra.png)
+This is the Linux version of IdleMon, an automated shiny hunting simulator. For the Windows version, visit the main branch: https://github.com/mixoploidy8031/idlemon
 
 ## Installation
 
 ### System Requirements
 - Linux (Ubuntu/Debian-based distributions)
-- Python 3.8 or later
 - Display resolution: 500x500 minimum
 - Audio output device (optional)
 
 ### Quick Install (Recommended)
+
+1. Download and extract the latest release, or clone the repository:
+```bash
+git clone -b linux https://github.com/mixoploidy8031/idlemon.git
+cd idlemon
+```
+
+2. Run the installation script:
+```bash
+sudo ./install_idlemon.sh
+```
+
+3. Start the application:
+- From applications menu: Search for "IdleMon"
+- From terminal: Type `IdleMon`
+
+Note: You may need to log out and log back in for the PATH changes to take effect.
+
+### Development Mode
+
+If you want to run the application directly from source or contribute to development:
 
 1. Install system dependencies:
 ```bash
@@ -42,29 +49,12 @@ python3 -m venv venv
 source venv/bin/activate
 ```
 
-4. Install Python dependencies and build:
+4. Install Python dependencies:
 ```bash
-pip install -r requirements.txt pyinstaller
-pyinstaller main.spec
+pip install -r requirements.txt
 ```
 
-5. Install the application:
-```bash
-sudo ./install_linux.sh
-```
-
-6. Start the application:
-- From applications menu: Search for "IdleMon"
-- From terminal: Type `IdleMon`
-
-Note: You may need to log out and log back in for the PATH changes to take effect.
-
-### Development Mode
-
-If you want to run the application directly from source:
-
-1. Follow steps 1-3 from the Quick Install section
-2. Run the application:
+5. Run the application:
 ```bash
 python src/main.py
 ```
@@ -85,17 +75,7 @@ The application stores data differently depending on how it's run:
   - Shiny encounters: `logs/shinies_encountered.txt`
   - Shiny count: `logs/shiny_count.bin`
 
-### Uninstallation
-```bash
-sudo rm -rf /usr/local/games/idlemon /usr/share/applications/idlemon.desktop /usr/local/games/IdleMon
-```
-
-Note: This will not remove user data. To remove all user data, also delete:
-```bash
-rm -rf ~/.local/share/idlemon
-```
-
-## Configuration
+### Configuration
 
 The game can be configured by editing `config.json`. 
 
@@ -104,30 +84,42 @@ For installed version, edit `/usr/local/games/idlemon/config.json` (may require 
 
 ```json
 {
-    "encounter_delay": 2.5,        # Time between encounters in seconds
-    "shiny_rate": 2000,           # 1 in X chance of finding a shiny
-    "mute_audio": false,          # Set to true to disable all sounds
     "background_image": "assets/images/default_background.jpg",  # Path to background image
-    "rarity_weights": {           # Spawn rates for different rarities
-        "Very Common": 45,        # 45% chance
-        "Common": 30,            # 30% chance
-        "Semi-rare": 17,         # 17% chance
-        "Rare": 7,              # 7% chance
-        "Very Rare": 1          # 1% chance
-    }
+    "mute_audio": false                                         # Set to true to disable all sounds
 }
 ```
 
-### Background Image
-You can use a custom background image by setting the `background_image` path in `config.json`:
-- Use a relative path from the game directory: `"background_image": "assets/images/my_background.jpg"`
-- Or use an absolute path: `"background_image": "/home/user/pictures/my_background.jpg"`
+#### Custom Background Images
+You can use a custom background image by setting the `background_image` path:
+- Use a relative path: `"background_image": "assets/images/my_background.jpg"`
+- Or absolute path: `"background_image": "/home/user/pictures/my_background.jpg"`
 - Supported formats: JPG, PNG
-- If the image is not found, it will fall back to the default background
+- If not found, falls back to default background
 
-Note: After changing the config file in installed mode, you may need to fix permissions:
+#### Audio Settings
+- Set `mute_audio` to `true` to disable all sound effects
+- Set `mute_audio` to `false` to enable sound effects
+
+Note: After changing the config file in installed mode, fix permissions:
 ```bash
 sudo chown $USER:$USER /usr/local/games/idlemon/config.json
+```
+
+### Uninstallation
+
+You can uninstall using the provided script:
+```bash
+sudo ./uninstall_idlemon.sh
+```
+
+Or manually:
+```bash
+sudo rm -rf /usr/local/games/idlemon /usr/share/applications/idlemon.desktop /usr/local/games/IdleMon
+```
+
+To also remove user data:
+```bash
+rm -rf ~/.local/share/idlemon
 ```
 
 ## Troubleshooting
