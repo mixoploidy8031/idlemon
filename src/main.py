@@ -12,43 +12,40 @@ from logger import logger
 from pathlib import Path
 import sys
 
+# Print startup info
 print("Starting application...")
 print(f"Executable path: {sys.executable}")
 print(f"Working directory: {os.getcwd()}")
 
 def get_base_path():
-    # Determine base path for development and PyInstaller
+    # Get application base path for both dev and PyInstaller modes
     if getattr(sys, 'frozen', False):
-        # If the application is run as a bundle (PyInstaller)
+        # PyInstaller mode: use executable directory
         return Path(sys.executable).parent
     else:
-        # If running in development
+        # Development mode: use project root
         return Path(__file__).parent.parent
 
+# Set application root path
 PROJECT_ROOT = get_base_path()
 
-# Load configuration
+# Initialize core components
 config = load_config()
-
-# Create data manager instance
 data_manager = DataManager(config)
 
-# Extract user-configurable values
-gif_directory = config["gif_directory"]
-
-# Extract internal defaults
+# Load configuration values
 shiny_count_file = config["shiny_count_file"]
 encounter_delay = config["encounter_delay"]
 rarity_weights = config["rarity_weights"]
 shiny_rate = config["shiny_rate"]
 mute_audio = config["mute_audio"]
 
-# Validate required files
+# Verify required files exist
 check_file_exists(shiny_count_file)
 for gen_file in config["pokemon_data_files"].values():
     check_file_exists(gen_file)
 
-# Initialize global variables
+# Initialize state variables
 current_encounter = None
 total_encounters = 0
 total_shiny_found = 0
@@ -58,21 +55,21 @@ start_time = None
 timer_running = False
 frames = []
 
-# Initialize pygame mixer globally
+# Initialize audio
 pygame.mixer.init()
 
-# Initialize the Tkinter window
+# Setup main window
 root = tk.Tk()
 root.title("IdleMon")
 root.minsize(500, 500)
 
-# Load the background image
+# Load background image
 background_image_path = config["background_image"]
 if os.path.isabs(background_image_path):
-    # If it's an absolute path, use it directly
+    # Use absolute path if provided
     background_path = Path(background_image_path)
 else:
-    # If it's a relative path, use it relative to project root
+    # Use path relative to executable
     background_path = PROJECT_ROOT / background_image_path
 
 # Fallback to default background if specified path doesn't exist

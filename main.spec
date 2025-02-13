@@ -8,22 +8,22 @@ block_cipher = None
 PROJECT_ROOT = Path(os.getcwd())
 
 added_files = [
-    ('assets/sounds/*.wav', './assets/sounds'),
-    ('assets/images/*.jpg', './assets/images'),
-    ('assets/images/*.ico', './assets/images'),
-    ('assets/gifs/gen1/normal/*', './assets/gifs/gen1/normal'),
-    ('assets/gifs/gen1/shiny/*', './assets/gifs/gen1/shiny'),
-    ('assets/gifs/gen2/normal/*', './assets/gifs/gen2/normal'),
-    ('assets/gifs/gen2/shiny/*', './assets/gifs/gen2/shiny'),
-    ('assets/gifs/gen3/normal/*', './assets/gifs/gen3/normal'),
-    ('assets/gifs/gen3/shiny/*', './assets/gifs/gen3/shiny'),
-    ('assets/gifs/gen4/normal/*', './assets/gifs/gen4/normal'),
-    ('assets/gifs/gen4/shiny/*', './assets/gifs/gen4/shiny'),
-    ('assets/gifs/gen5/normal/*', './assets/gifs/gen5/normal'),
-    ('assets/gifs/gen5/shiny/*', './assets/gifs/gen5/shiny'),
-    ('assets/data/*', './assets/data'),
+    ('assets/sounds/*.wav', 'assets/sounds'),
+    ('assets/images/*.jpg', 'assets/images'),
+    ('assets/images/*.ico', 'assets/images'),
+    ('assets/images/*.png', 'assets/images'),
+    ('assets/gifs/gen1/normal/*', 'assets/gifs/gen1/normal'),
+    ('assets/gifs/gen1/shiny/*', 'assets/gifs/gen1/shiny'),
+    ('assets/gifs/gen2/normal/*', 'assets/gifs/gen2/normal'),
+    ('assets/gifs/gen2/shiny/*', 'assets/gifs/gen2/shiny'),
+    ('assets/gifs/gen3/normal/*', 'assets/gifs/gen3/normal'),
+    ('assets/gifs/gen3/shiny/*', 'assets/gifs/gen3/shiny'),
+    ('assets/gifs/gen4/normal/*', 'assets/gifs/gen4/normal'),
+    ('assets/gifs/gen4/shiny/*', 'assets/gifs/gen4/shiny'),
+    ('assets/gifs/gen5/normal/*', 'assets/gifs/gen5/normal'),
+    ('assets/gifs/gen5/shiny/*', 'assets/gifs/gen5/shiny'),
+    ('assets/data/*', 'assets/data'),
     ('config.json', '.'),
-    ('logs/*', './logs'),
 ]
 
 a = Analysis(

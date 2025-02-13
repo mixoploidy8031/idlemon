@@ -28,64 +28,70 @@ https://github.com/mixoploidy8031/idlemon/tree/linux
 ---
 
 ## Requirements
+For building from source:
 - Python 3.8 or later
-- Required libraries: `Pillow`, `pygame`, `tkinter`, `colorama`
+- Required libraries listed in requirements.txt
 
 Install dependencies:
 ```bash
-pip install pillow pygame colorama
+# Using pip (Windows/Linux)
+pip install -r requirements.txt
+
+# Or if you have multiple Python versions
+python -m pip install -r requirements.txt
 ```
 
 ---
 
 ## Usage
 
-Option 1: Run from source
-1. Clone the repository
-2. Run the simulator from the project root:
-   ```bash
-   python src/main.py
-   ```
-
-Option 2: Run executable
+### Windows Portable Version
 1. Download the latest release
-2. Extract the zip file
-3. Run IdleMon.exe
+2. Extract the zip file anywhere you like
+3. Run `IdleMon.exe` from the extracted folder
+
+The application is fully portable:
+- Can be run from any location
+- All data is stored in the application folder
+- No installation required
+- No system modifications
+
+### Building from Source (Windows)
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   python -m pip install -r requirements.txt
+   ```
+3. Build the executable:
+   ```bash
+   pyinstaller main.spec
+   ```
+4. The portable version will be created in `dist/IdleMon`
 
 ---
 
 ## Configuration
-The simulator uses a JSON file (`config.json`) for customization:
+The simulator can be customized using a `config.json` file placed in the same folder as the executable:
 
 ### Example `config.json`
 ```json
 {
-    "gif_directory": "assets/gifs",
     "background_image": "C:/Users/YourName/Pictures/custom_background.png",
     "mute_audio": false
 }
 ```
 
-Note: All paths in the config file should be relative to the project root directory.
-
 ### Key Settings
-- **`gif_directory`:** Path to Pokémon GIFs (requires `normal` and `shiny` subdirectories)
 - **`background_image`:** Path to background image. Can be:
   - Absolute path (e.g., "C:/Users/YourName/Pictures/custom_background.png")
-  - Relative path from project root (e.g., "assets/images/custom_background.png")
-  - Defaults to "assets/images/default_background.jpg" if not found
+  - Relative path from executable (e.g., "assets/images/custom_background.png")
+  - Defaults to included background if not found
 - **`mute_audio`:** Set to `true` to disable all sound effects (default: `false`)
 
-### Directory Structure
+### Portable Directory Structure
 ```
-project_root/
-├── src/
-│   ├── main.py
-│   ├── config_loader.py
-│   ├── data_manager.py
-│   ├── encounter_manager.py
-│   ├── gui_elements.py
-│   └── logger.py
+IdleMon/
+├── IdleMon.exe
 ├── assets/
 │   ├── gifs/
 │   │   ├── gen1/
@@ -114,11 +120,11 @@ project_root/
 │   │   └── gen5_pokemon_names.txt
 │   └── images/
 │       └── background.png
-├── logs/
-│   ├── shiny_count.bin
-│   ├── shinies_encountered.txt
-│   └── error.log
-└── config.json
+├── config.json (optional)
+└── logs/      (created automatically)
+    ├── shiny_count.bin
+    ├── shinies_encountered.txt
+    └── error.log
 ```
 
 ---
@@ -151,7 +157,7 @@ project_root/
 To reset your hunting progress, you can either:
 
 Delete individual files:
-1. Navigate to the `logs` directory
+1. Navigate to the `logs` directory in your IdleMon folder
 2. Delete these files:
    - `shiny_count.bin` (resets total shinies to 0)
    - `shinies_encountered.txt` (clears shiny encounter history)
@@ -159,8 +165,7 @@ Delete individual files:
 OR
 
 Simply delete the entire `logs` directory.
-
-New files will be automatically created on next launch.
+New files will be automatically created when you next run the program.
 
 ---
 

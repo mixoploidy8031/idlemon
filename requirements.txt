@@ -1,0 +1,4 @@
+Pillow>=10.0.0     # For image handling and GIF animations
+pygame>=2.5.0      # For sound effects
+colorama>=0.4.6    # For colored terminal output
+pyinstaller>=6.0.0 # For creating the executable (build only) 
