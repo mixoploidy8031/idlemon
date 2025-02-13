@@ -2,7 +2,7 @@
 
 This project simulates encountering Pokémon with a chance of finding shiny Pokémon. It features animated GIFs for Pokémon encounters, shiny tracking, encounter statistics, and customization options.
 
-> **Note:** Looking for the Linux version? Check out the [Linux branch](https://github.com/mixoploidy8031/idlemon/tree/linux)
+> **Note:** Looking for the Linux version? Check out the [Linux branch](https://github.com/zainibeats/idlemon/tree/linux)
 
 ![icon](assets/images/icon_png.png)
 
