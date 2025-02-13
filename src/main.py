@@ -82,9 +82,16 @@ if not check_file_exists(background_path):
         root.destroy()
         sys.exit(1)
 
-background_image = tk.PhotoImage(file=str(background_path))
+# Load and scale background image
+pil_image = Image.open(background_path)
+# Scale to fit 500px height while maintaining aspect ratio
+target_height = 500
+scale = target_height / pil_image.height
+target_width = int(pil_image.width * scale)
+pil_image = pil_image.resize((target_width, target_height), Image.Resampling.LANCZOS)
+background_image = ImageTk.PhotoImage(pil_image)
 
-# Get dimensions of the background image
+# Get dimensions of the scaled background
 background_width = background_image.width()
 background_height = background_image.height()
 
@@ -234,7 +241,7 @@ def display_pokemon_gif(pokemon_name, is_shiny=False):
             canvas_width = canvas.winfo_width()
             canvas_height = canvas.winfo_height()
             center_x = canvas_width // 2
-            center_y = (canvas_height * 5) // 6
+            center_y = (canvas_height * 3.75) // 5
             
             # Clear previous frame and draw new one
             canvas.delete("pokemon_gif")
