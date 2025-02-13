@@ -241,7 +241,7 @@ def display_pokemon_gif(pokemon_name, is_shiny=False):
             canvas_width = canvas.winfo_width()
             canvas_height = canvas.winfo_height()
             center_x = canvas_width // 2
-            center_y = (canvas_height * 5) // 6
+            center_y = (canvas_height * 3.75) // 5
             
             # Clear previous frame and draw new one
             canvas.delete("pokemon_gif")
